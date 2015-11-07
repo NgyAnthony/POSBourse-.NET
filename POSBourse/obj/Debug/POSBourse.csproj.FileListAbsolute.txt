@@ -1,0 +1,13 @@
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\POSBourse.exe.config
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\POSBourse.exe
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\POSBourse.pdb
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.csprojResolveAssemblyReference.cache
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\MainWindow.baml
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\MainWindow.g.cs
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\App.g.cs
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse_MarkupCompile.cache
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.g.resources
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.Properties.Resources.resources
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.csproj.GenerateResource.Cache
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.exe
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.pdb
