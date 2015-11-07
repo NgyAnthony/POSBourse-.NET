@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bourse.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="bourseStoreContainer">
+    <EntitySet Name="ProductSet" EntityType="bourse.Store.ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SoldProductSet" EntityType="bourse.Store.SoldProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionSet" EntityType="bourse.Store.TransactionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BuyTransactionSet" EntityType="bourse.Store.BuyTransactionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmittedCouponSet" EntityType="bourse.Store.EmittedCouponSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnteredCouponSet1" EntityType="bourse.Store.EnteredCouponSet1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnteredDirectExchangeSet1" EntityType="bourse.Store.EnteredDirectExchangeSet1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnteredDiscountSet" EntityType="bourse.Store.EnteredDiscountSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashInputSet" EntityType="bourse.Store.CashInputSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashOutputSet" EntityType="bourse.Store.CashOutputSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProductSoldProduct" Association="bourse.Store.ProductSoldProduct">
+      <End Role="Product" EntitySet="ProductSet" />
+      <End Role="SoldProduct" EntitySet="SoldProductSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionSoldProduct" Association="bourse.Store.TransactionSoldProduct">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="SoldProduct" EntitySet="SoldProductSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionBuyTransaction" Association="bourse.Store.TransactionBuyTransaction">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="BuyTransaction" EntitySet="BuyTransactionSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionCashOutput" Association="bourse.Store.TransactionCashOutput">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="CashOutput" EntitySet="CashOutputSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionCashInput" Association="bourse.Store.TransactionCashInput">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="CashInput" EntitySet="CashInputSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEmittedCoupon" Association="bourse.Store.TransactionEmittedCoupon">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EmittedCoupon" EntitySet="EmittedCouponSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredCoupon" Association="bourse.Store.TransactionEnteredCoupon">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredCoupon" EntitySet="EnteredCouponSet1" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredDirectExchange" Association="bourse.Store.TransactionEnteredDirectExchange">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredDirectExchange" EntitySet="EnteredDirectExchangeSet1" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredDiscount" Association="bourse.Store.TransactionEnteredDiscount">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredDiscount" EntitySet="EnteredDiscountSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="author" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editor" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SoldProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="price" Type="decimal" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="true" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="giftCouponValue" Type="decimal" Nullable="false" />
+    <Property Name="couponValue" Type="decimal" Nullable="false" />
+    <Property Name="usedCouponValue" Type="decimal" Nullable="false" />
+    <Property Name="exchangeValue" Type="decimal" Nullable="false" />
+    <Property Name="usedExchangeValue" Type="decimal" Nullable="false" />
+    <Property Name="convertedCouponExchangeValue" Type="decimal" Nullable="false" />
+    <Property Name="discountOfferValue" Type="decimal" Nullable="false" />
+    <Property Name="directExchangeValue" Type="decimal" Nullable="false" />
+    <Property Name="paycardValue" Type="decimal" Nullable="false" />
+    <Property Name="cashValue" Type="decimal" Nullable="false" />
+    <Property Name="realCashValue" Type="decimal" Nullable="false" />
+    <Property Name="emittedCouponValue" Type="decimal" Nullable="false" />
+    <Property Name="emittedCashValue" Type="decimal" Nullable="false" />
+    <Property Name="realEmittedCashValue" Type="decimal" Nullable="false" />
+    <Property Name="totalSalesValue" Type="decimal" Nullable="false" />
+    <Property Name="totalBuyValue" Type="decimal" Nullable="false" />
+    <Property Name="productCount" Type="bigint" Nullable="false" />
+    <Property Name="store" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BuyTransactionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="productType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Transaction_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmittedCouponSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="couponID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="onlyOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="transactionSpecificity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="policeBookID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredCouponSet1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="couponID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="store" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="couponType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredDirectExchangeSet1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datetime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="clientName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredDiscountSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="discountType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="discountValue" Type="decimal" Nullable="false" />
+    <Property Name="clientName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashInputSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reason" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="Transaction_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashOutputSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reason" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+    <Property Name="Transaction_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ProductSoldProduct">
+    <End Role="Product" Type="bourse.Store.ProductSet" Multiplicity="0..1" />
+    <End Role="SoldProduct" Type="bourse.Store.SoldProductSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SoldProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionSoldProduct">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="SoldProduct" Type="bourse.Store.SoldProductSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SoldProduct">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionBuyTransaction">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="BuyTransaction" Type="bourse.Store.BuyTransactionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BuyTransaction">
+        <PropertyRef Name="Transaction_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionCashOutput">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="CashOutput" Type="bourse.Store.CashOutputSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CashOutput">
+        <PropertyRef Name="Transaction_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionCashInput">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="CashInput" Type="bourse.Store.CashInputSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CashInput">
+        <PropertyRef Name="Transaction_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEmittedCoupon">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="EmittedCoupon" Type="bourse.Store.EmittedCouponSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmittedCoupon">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredCoupon">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="EnteredCoupon" Type="bourse.Store.EnteredCouponSet1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredCoupon">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredDirectExchange">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="EnteredDirectExchange" Type="bourse.Store.EnteredDirectExchangeSet1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredDirectExchange">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredDiscount">
+    <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
+    <End Role="EnteredDiscount" Type="bourse.Store.EnteredDiscountSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredDiscount">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

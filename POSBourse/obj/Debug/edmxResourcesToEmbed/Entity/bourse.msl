@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bourseStoreContainer" CdmEntityContainer="bourseContainer">
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="editor" ColumnName="editor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoldProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.SoldProduct)">
+        <MappingFragment StoreEntitySet="SoldProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.Transaction)">
+        <MappingFragment StoreEntitySet="TransactionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="giftCouponValue" ColumnName="giftCouponValue" />
+          <ScalarProperty Name="couponValue" ColumnName="couponValue" />
+          <ScalarProperty Name="usedCouponValue" ColumnName="usedCouponValue" />
+          <ScalarProperty Name="exchangeValue" ColumnName="exchangeValue" />
+          <ScalarProperty Name="usedExchangeValue" ColumnName="usedExchangeValue" />
+          <ScalarProperty Name="convertedCouponExchangeValue" ColumnName="convertedCouponExchangeValue" />
+          <ScalarProperty Name="discountOfferValue" ColumnName="discountOfferValue" />
+          <ScalarProperty Name="directExchangeValue" ColumnName="directExchangeValue" />
+          <ScalarProperty Name="paycardValue" ColumnName="paycardValue" />
+          <ScalarProperty Name="cashValue" ColumnName="cashValue" />
+          <ScalarProperty Name="realCashValue" ColumnName="realCashValue" />
+          <ScalarProperty Name="emittedCouponValue" ColumnName="emittedCouponValue" />
+          <ScalarProperty Name="emittedCashValue" ColumnName="emittedCashValue" />
+          <ScalarProperty Name="realEmittedCashValue" ColumnName="realEmittedCashValue" />
+          <ScalarProperty Name="totalSalesValue" ColumnName="totalSalesValue" />
+          <ScalarProperty Name="totalBuyValue" ColumnName="totalBuyValue" />
+          <ScalarProperty Name="productCount" ColumnName="productCount" />
+          <ScalarProperty Name="store" ColumnName="store" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyTransactionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.BuyTransaction)">
+        <MappingFragment StoreEntitySet="BuyTransactionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="productType" ColumnName="productType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmittedCouponSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.EmittedCoupon)">
+        <MappingFragment StoreEntitySet="EmittedCouponSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="couponID" ColumnName="couponID" />
+          <ScalarProperty Name="onlyOn" ColumnName="onlyOn" />
+          <ScalarProperty Name="transactionSpecificity" ColumnName="transactionSpecificity" />
+          <ScalarProperty Name="policeBookID" ColumnName="policeBookID" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnteredCouponSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.EnteredCoupon)">
+        <MappingFragment StoreEntitySet="EnteredCouponSet1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="couponID" ColumnName="couponID" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="store" ColumnName="store" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="couponType" ColumnName="couponType" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnteredDirectExchangeSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.EnteredDirectExchange)">
+        <MappingFragment StoreEntitySet="EnteredDirectExchangeSet1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="clientName" ColumnName="clientName" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnteredDiscountSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.EnteredDiscount)">
+        <MappingFragment StoreEntitySet="EnteredDiscountSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="discountType" ColumnName="discountType" />
+          <ScalarProperty Name="discountValue" ColumnName="discountValue" />
+          <ScalarProperty Name="clientName" ColumnName="clientName" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashInputSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.CashInput)">
+        <MappingFragment StoreEntitySet="CashInputSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashOutputSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.CashOutput)">
+        <MappingFragment StoreEntitySet="CashOutputSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TransactionBuyTransaction" TypeName="bourse.TransactionBuyTransaction" StoreEntitySet="BuyTransactionSet">
+      <EndProperty Name="Transaction">
+        <ScalarProperty Name="Id" ColumnName="Transaction_Id" />
+      </EndProperty>
+      <EndProperty Name="BuyTransaction">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TransactionCashOutput" TypeName="bourse.TransactionCashOutput" StoreEntitySet="CashOutputSet">
+      <EndProperty Name="Transaction">
+        <ScalarProperty Name="Id" ColumnName="Transaction_Id" />
+      </EndProperty>
+      <EndProperty Name="CashOutput">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TransactionCashInput" TypeName="bourse.TransactionCashInput" StoreEntitySet="CashInputSet">
+      <EndProperty Name="Transaction">
+        <ScalarProperty Name="Id" ColumnName="Transaction_Id" />
+      </EndProperty>
+      <EndProperty Name="CashInput">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

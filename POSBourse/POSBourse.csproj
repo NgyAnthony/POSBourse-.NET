@@ -34,8 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +70,51 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entity\bourse.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bourse.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\bourse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\bourse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bourse.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BuyTransaction.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CashInput.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CashOutput.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\EmittedCoupon.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\EnteredCoupon.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\EnteredDirectExchange.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\EnteredDiscount.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Product.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SoldProduct.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Transaction.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -84,6 +138,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Entity\bourse.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bourse.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entity\bourse.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>bourse.Context.cs</LastGenOutput>
+      <DependentUpon>bourse.edmx</DependentUpon>
+    </None>
+    <None Include="Entity\bourse.edmx.diagram">
+      <DependentUpon>bourse.edmx</DependentUpon>
+    </None>
+    <None Include="Entity\bourse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>bourse.cs</LastGenOutput>
+      <DependentUpon>bourse.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entity\bourse.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

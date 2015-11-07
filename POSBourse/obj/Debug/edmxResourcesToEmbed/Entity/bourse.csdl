@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="bourse" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="bourseContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ProductSet" EntityType="bourse.Product" />
+    <EntitySet Name="SoldProductSet" EntityType="bourse.SoldProduct" />
+    <EntitySet Name="TransactionSet" EntityType="bourse.Transaction" />
+    <EntitySet Name="BuyTransactionSet" EntityType="bourse.BuyTransaction" />
+    <EntitySet Name="EmittedCouponSet" EntityType="bourse.EmittedCoupon" />
+    <EntitySet Name="EnteredCouponSet1" EntityType="bourse.EnteredCoupon" />
+    <EntitySet Name="EnteredDirectExchangeSet1" EntityType="bourse.EnteredDirectExchange" />
+    <EntitySet Name="EnteredDiscountSet" EntityType="bourse.EnteredDiscount" />
+    <EntitySet Name="CashInputSet" EntityType="bourse.CashInput" />
+    <EntitySet Name="CashOutputSet" EntityType="bourse.CashOutput" />
+    <AssociationSet Name="ProductSoldProduct" Association="bourse.ProductSoldProduct">
+      <End Role="Product" EntitySet="ProductSet" />
+      <End Role="SoldProduct" EntitySet="SoldProductSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionSoldProduct" Association="bourse.TransactionSoldProduct">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="SoldProduct" EntitySet="SoldProductSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionBuyTransaction" Association="bourse.TransactionBuyTransaction">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="BuyTransaction" EntitySet="BuyTransactionSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionCashOutput" Association="bourse.TransactionCashOutput">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="CashOutput" EntitySet="CashOutputSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionCashInput" Association="bourse.TransactionCashInput">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="CashInput" EntitySet="CashInputSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEmittedCoupon" Association="bourse.TransactionEmittedCoupon">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EmittedCoupon" EntitySet="EmittedCouponSet" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredCoupon" Association="bourse.TransactionEnteredCoupon">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredCoupon" EntitySet="EnteredCouponSet1" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredDirectExchange" Association="bourse.TransactionEnteredDirectExchange">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredDirectExchange" EntitySet="EnteredDirectExchangeSet1" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionEnteredDiscount" Association="bourse.TransactionEnteredDiscount">
+      <End Role="Transaction" EntitySet="TransactionSet" />
+      <End Role="EnteredDiscount" EntitySet="EnteredDiscountSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" />
+    <Property Name="title" Type="String" Nullable="false" />
+    <Property Name="author" Type="String" Nullable="false" />
+    <Property Name="editor" Type="String" Nullable="false" />
+    <NavigationProperty Name="SoldProduct" Relationship="bourse.ProductSoldProduct" FromRole="Product" ToRole="SoldProduct" />
+  </EntityType>
+  <EntityType Name="SoldProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <Property Name="price" Type="Decimal" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="bourse.ProductSoldProduct" FromRole="SoldProduct" ToRole="Product" />
+    <Property Name="ProductId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionSoldProduct" FromRole="SoldProduct" ToRole="Transaction" />
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <Property Name="giftCouponValue" Type="Decimal" Nullable="false" />
+    <Property Name="couponValue" Type="Decimal" Nullable="false" />
+    <Property Name="usedCouponValue" Type="Decimal" Nullable="false" />
+    <Property Name="exchangeValue" Type="Decimal" Nullable="false" />
+    <Property Name="usedExchangeValue" Type="Decimal" Nullable="false" />
+    <Property Name="convertedCouponExchangeValue" Type="Decimal" Nullable="false" />
+    <Property Name="discountOfferValue" Type="Decimal" Nullable="false" />
+    <Property Name="directExchangeValue" Type="Decimal" Nullable="false" />
+    <Property Name="paycardValue" Type="Decimal" Nullable="false" />
+    <Property Name="cashValue" Type="Decimal" Nullable="false" />
+    <Property Name="realCashValue" Type="Decimal" Nullable="false" />
+    <Property Name="emittedCouponValue" Type="Decimal" Nullable="false" />
+    <Property Name="emittedCashValue" Type="Decimal" Nullable="false" />
+    <Property Name="realEmittedCashValue" Type="Decimal" Nullable="false" />
+    <Property Name="totalSalesValue" Type="Decimal" Nullable="false" />
+    <Property Name="totalBuyValue" Type="Decimal" Nullable="false" />
+    <Property Name="productCount" Type="Int64" Nullable="false" />
+    <Property Name="store" Type="String" Nullable="false" />
+    <NavigationProperty Name="SoldProduct" Relationship="bourse.TransactionSoldProduct" FromRole="Transaction" ToRole="SoldProduct" />
+    <NavigationProperty Name="BuyTransaction" Relationship="bourse.TransactionBuyTransaction" FromRole="Transaction" ToRole="BuyTransaction" />
+    <NavigationProperty Name="CashOutput" Relationship="bourse.TransactionCashOutput" FromRole="Transaction" ToRole="CashOutput" />
+    <NavigationProperty Name="CashInput" Relationship="bourse.TransactionCashInput" FromRole="Transaction" ToRole="CashInput" />
+    <NavigationProperty Name="EmittedCoupon" Relationship="bourse.TransactionEmittedCoupon" FromRole="Transaction" ToRole="EmittedCoupon" />
+    <NavigationProperty Name="EnteredCoupon" Relationship="bourse.TransactionEnteredCoupon" FromRole="Transaction" ToRole="EnteredCoupon" />
+    <NavigationProperty Name="EnteredDirectExchange" Relationship="bourse.TransactionEnteredDirectExchange" FromRole="Transaction" ToRole="EnteredDirectExchange" />
+    <NavigationProperty Name="EnteredDiscount" Relationship="bourse.TransactionEnteredDiscount" FromRole="Transaction" ToRole="EnteredDiscount" />
+  </EntityType>
+  <EntityType Name="BuyTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <Property Name="productType" Type="String" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionBuyTransaction" FromRole="BuyTransaction" ToRole="Transaction" />
+  </EntityType>
+  <EntityType Name="EmittedCoupon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="couponID" Type="String" Nullable="false" />
+    <Property Name="onlyOn" Type="String" Nullable="false" />
+    <Property Name="transactionSpecificity" Type="String" Nullable="false" />
+    <Property Name="policeBookID" Type="String" Nullable="false" />
+    <Property Name="value" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEmittedCoupon" FromRole="EmittedCoupon" ToRole="Transaction" />
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredCoupon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="couponID" Type="String" Nullable="false" />
+    <Property Name="value" Type="String" Nullable="false" />
+    <Property Name="store" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <Property Name="couponType" Type="String" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredCoupon" FromRole="EnteredCoupon" ToRole="Transaction" />
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredDirectExchange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="String" Nullable="false" />
+    <Property Name="clientName" Type="String" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredDirectExchange" FromRole="EnteredDirectExchange" ToRole="Transaction" />
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnteredDiscount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="discountType" Type="String" Nullable="false" />
+    <Property Name="discountValue" Type="Decimal" Nullable="false" />
+    <Property Name="clientName" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredDiscount" FromRole="EnteredDiscount" ToRole="Transaction" />
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashInput">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reason" Type="String" Nullable="false" />
+    <Property Name="value" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionCashInput" FromRole="CashInput" ToRole="Transaction" />
+  </EntityType>
+  <EntityType Name="CashOutput">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reason" Type="String" Nullable="false" />
+    <Property Name="value" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="bourse.TransactionCashOutput" FromRole="CashOutput" ToRole="Transaction" />
+  </EntityType>
+  <Association Name="ProductSoldProduct">
+    <End Type="bourse.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="bourse.SoldProduct" Role="SoldProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SoldProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionSoldProduct">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.SoldProduct" Role="SoldProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SoldProduct">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionBuyTransaction">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.BuyTransaction" Role="BuyTransaction" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TransactionCashOutput">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.CashOutput" Role="CashOutput" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TransactionCashInput">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.CashInput" Role="CashInput" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TransactionEmittedCoupon">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.EmittedCoupon" Role="EmittedCoupon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmittedCoupon">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredCoupon">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.EnteredCoupon" Role="EnteredCoupon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredCoupon">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredDirectExchange">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.EnteredDirectExchange" Role="EnteredDirectExchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredDirectExchange">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionEnteredDiscount">
+    <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="bourse.EnteredDiscount" Role="EnteredDiscount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnteredDiscount">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

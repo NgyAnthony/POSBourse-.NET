@@ -11,3 +11,9 @@ c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.csproj.GenerateResource.Cache
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.exe
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse.pdb
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\EntityFramework.dll
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\EntityFramework.xml
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\fr\EntityFramework.resources.dll
+c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse_Content.g.cs
