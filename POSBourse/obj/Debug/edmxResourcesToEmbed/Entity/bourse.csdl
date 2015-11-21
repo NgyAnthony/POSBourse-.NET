@@ -70,6 +70,7 @@
     <Property Name="ProductId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionSoldProduct" FromRole="SoldProduct" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
+    <Property Name="inStock" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Transaction">
     <Key>

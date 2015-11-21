@@ -72,6 +72,7 @@
     <Property Name="price" Type="decimal" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="true" />
     <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="inStock" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TransactionSet">
     <Key>
@@ -354,6 +355,7 @@
           <Property Name="ProductId" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Transaction" Relationship="bourse.TransactionSoldProduct" FromRole="SoldProduct" ToRole="Transaction" />
           <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="inStock" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -575,6 +577,7 @@
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="inStock" ColumnName="inStock" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

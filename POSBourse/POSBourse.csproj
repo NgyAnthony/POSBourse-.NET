@@ -70,6 +70,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bean\TableProduct.cs" />
+    <Compile Include="Business\TransactionManager.cs" />
     <Compile Include="Entity\bourse.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

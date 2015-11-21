@@ -20,6 +20,7 @@
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="inStock" ColumnName="inStock" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

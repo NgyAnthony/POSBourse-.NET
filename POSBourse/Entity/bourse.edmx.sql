@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/07/2015 19:18:31
--- Generated from EDMX file: c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\Entity\bourse.edmx
+-- Date Created: 11/21/2015 15:21:04
+-- Generated from EDMX file: C:\Users\Alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\Entity\bourse.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,6 +17,33 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ProductSoldProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SoldProductSet] DROP CONSTRAINT [FK_ProductSoldProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionSoldProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SoldProductSet] DROP CONSTRAINT [FK_TransactionSoldProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionBuyTransaction]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BuyTransactionSet] DROP CONSTRAINT [FK_TransactionBuyTransaction];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionCashOutput]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashOutputSet] DROP CONSTRAINT [FK_TransactionCashOutput];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionCashInput]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashInputSet] DROP CONSTRAINT [FK_TransactionCashInput];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionEmittedCoupon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmittedCouponSet] DROP CONSTRAINT [FK_TransactionEmittedCoupon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionEnteredCoupon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EnteredCouponSet1] DROP CONSTRAINT [FK_TransactionEnteredCoupon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionEnteredDirectExchange]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EnteredDirectExchangeSet1] DROP CONSTRAINT [FK_TransactionEnteredDirectExchange];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionEnteredDiscount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EnteredDiscountSet] DROP CONSTRAINT [FK_TransactionEnteredDiscount];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -43,6 +70,15 @@ GO
 IF OBJECT_ID(N'[dbo].[EnteredDirectExchangeSet1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EnteredDirectExchangeSet1];
 GO
+IF OBJECT_ID(N'[dbo].[EnteredDiscountSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EnteredDiscountSet];
+GO
+IF OBJECT_ID(N'[dbo].[CashInputSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashInputSet];
+GO
+IF OBJECT_ID(N'[dbo].[CashOutputSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashOutputSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -64,7 +100,8 @@ CREATE TABLE [dbo].[SoldProductSet] (
     [datetime] datetime  NOT NULL,
     [price] decimal(18,0)  NOT NULL,
     [ProductId] int  NULL,
-    [TransactionId] int  NOT NULL
+    [TransactionId] int  NOT NULL,
+    [inStock] bit  NOT NULL
 );
 GO
 
