@@ -59,38 +59,55 @@
         <TextBox x:Name="EditeurTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="824,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" KeyDown="EditeurTextBox_KeyDown"/>
         <Label Content="Auteur" Grid.Column="1" HorizontalAlignment="Left" Margin="679,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.043,0.635"/>
         <Label Content="Editeur" Grid.Column="1" HorizontalAlignment="Left" Margin="824,25,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="ProduitsDataGrid" HorizontalAlignment="Left" Margin="47,89,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="142" Width="1205">
+        <DataGrid x:Name="ProduitsDataGrid" ItemsSource="{Binding ProduitsCollection, Mode=TwoWay}" CanUserAddRows="False" HorizontalAlignment="Left" Margin="47,89,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="142" Width="1205">
             <DataGrid.Columns>
                 <DataGridTextColumn
                                 x:Name="ProduitPrix"
                                 Header="Prix"
-                                Binding="{Binding prix}"/>
+                                Binding="{Binding prix}"
+                                IsReadOnly="False"/>
 
                 <DataGridTextColumn x:Name="ProduitCode"
                                 Header="Code (EAN / ISBN)"
-                                Binding="{Binding code}"/>
+                                Binding="{Binding code}"
+                                IsReadOnly="False"/>
 
                 <DataGridTextColumn x:Name="ProduitTitre"
                                 Header="Titre"
-                                Binding="{Binding titre}"/>
+                                Binding="{Binding titre}"
+                                IsReadOnly="False"/>
 
                 <DataGridTextColumn x:Name="Réassort"
                                 Header="Reassort"
-                                Binding="{Binding reassort}"/>
+                                Binding="{Binding reassort}"
+                                IsReadOnly="False"/>
                 
                 <DataGridTextColumn x:Name="ProduitType"
                                 Header="Type"
-                                Binding="{Binding type}"/>
+                                Binding="{Binding type}"
+                                IsReadOnly="False"/>
 
                 <DataGridTextColumn x:Name="ProduitAuteur"
                                 Header="Auteur"
-                                Binding="{Binding auteur}"/>
+                                Binding="{Binding auteur}"
+                                IsReadOnly="False"/>
 
                 <DataGridTextColumn x:Name="ProduitEditeur"
                                 Header="Editeur"
-                                Binding="{Binding editeur}"/>
+                                Binding="{Binding editeur}"
+                                IsReadOnly="False"/>
 
             </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Click="Context_Delete_Produit">
+                        <MenuItem.Icon>
+                            <Image Width="12" Height="12" Source="Images/Delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
 
         </DataGrid>
         <Button x:Name="AjouterProduitButton" Content="Ajouter" Grid.Column="1" HorizontalAlignment="Left" Margin="975,51,0,0" VerticalAlignment="Top" Width="100" Height="23" Click="AjouterProduitButton_Click"/>

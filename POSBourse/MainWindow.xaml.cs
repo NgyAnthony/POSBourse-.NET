@@ -16,6 +16,7 @@ using POSBourse.Entity;
 using POSBourse.Bean;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace POSBourse
 {
@@ -24,9 +25,15 @@ namespace POSBourse
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = this;
+
+            ProduitsCollection = new ObservableCollection<TableProduct>();
         }
 
         private void addProductIntoTable()
@@ -69,7 +76,7 @@ namespace POSBourse
                 editeur = editeur
             };
 
-            ProduitsDataGrid.Items.Add(tableProduct);
+            this.ProduitsCollection.Add(tableProduct);
 
             PrixTextBox.Text = "";
             CodeTextBox.Text = "";
@@ -96,6 +103,25 @@ namespace POSBourse
             {
                 addProductIntoTable();
             }
+        }
+
+        private void Context_Delete_Produit(object sender, RoutedEventArgs e)
+        {
+            //Get the clicked MenuItem
+            var menuItem = (MenuItem)sender;
+
+            //Get the ContextMenu to which the menuItem belongs
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            //Find the placementTarget
+            var item = (DataGrid)contextMenu.PlacementTarget;
+
+            //Get the underlying item, that you cast to your object that is bound
+            //to the DataGrid (and has subject and state as property)
+            var toDeleteFromBindedList = (TableProduct)item.SelectedCells[0].Item;
+
+            //Remove item into observable collection.
+            ProduitsCollection.Remove(toDeleteFromBindedList);
         }
 
     }
