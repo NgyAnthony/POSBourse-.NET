@@ -41,15 +41,7 @@
         <Label Content="Prix" Margin="47,25,100,0" VerticalAlignment="Top" RenderTransformOrigin="0.576,3.077"/>
         <Label Content="Code (EAN / ISBN)" HorizontalAlignment="Left" Margin="124,26,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="114" RenderTransformOrigin="0.509,-1.385"/>
         <Label Content="Type de produit" Grid.Column="1" HorizontalAlignment="Left" Margin="341,26,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="TypeSelectBox" Grid.Column="1" HorizontalAlignment="Left" Margin="341,52,0,0" VerticalAlignment="Top" Width="176" Height="22">
-            <ComboBoxItem IsSelected="True">LIVRE</ComboBoxItem>
-            <ComboBoxItem>CD</ComboBoxItem>
-            <ComboBoxItem>VINYLE</ComboBoxItem>
-            <ComboBoxItem>DVD</ComboBoxItem>
-            <ComboBoxItem>BLU-RAY</ComboBoxItem>
-            <ComboBoxItem>JEU</ComboBoxItem>
-            <ComboBoxItem>AUTRE</ComboBoxItem>
-        </ComboBox>
+        <ComboBox x:Name="TypeSelectBox" ItemsSource="{Binding ProduitsDataComboItems}" SelectedIndex="0" DisplayMemberPath="Value" SelectedValuePath="Id" Grid.Column="1" HorizontalAlignment="Left" Margin="341,52,0,0" VerticalAlignment="Top" Width="176" Height="22"></ComboBox>
         <TextBox x:Name="TitreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="533,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126" />
         <Label Content="Titre" Grid.Column="1" HorizontalAlignment="Left" Margin="533,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="6.597,0.788"/>
         <TextBox x:Name="AuteurTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="679,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="131"/>
@@ -63,15 +55,15 @@
                 <DataGridTextColumn
                                 x:Name="ProduitPrix"
                                 Header="Prix"
-                                Binding="{Binding prix}"/>
+                                Binding="{Binding Prix}"/>
 
                 <DataGridTextColumn x:Name="ProduitCode"
                                 Header="Code (EAN / ISBN)"
-                                Binding="{Binding code}"/>
+                                Binding="{Binding Code}"/>
 
                 <DataGridTextColumn x:Name="ProduitTitre"
                                 Header="Titre"
-                                Binding="{Binding titre}"/>
+                                Binding="{Binding Titre}"/>
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
@@ -90,17 +82,30 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn x:Name="ProduitType"
-                                Header="Type"
-                                Binding="{Binding type}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Reassort
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox x:Name="TypeProduitsSelectBoxProduits" SelectedValue="{Binding Type}" ItemsSource="{Binding ProduitsDataComboItems,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" DisplayMemberPath="Value" SelectedValuePath="Id"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox x:Name="TypeProduitsSelectBoxProduits" ItemsSource="{Binding ProduitsDataComboItems,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" DisplayMemberPath="Value" SelectedValuePath="Id"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+
+                </DataGridTemplateColumn>
 
                 <DataGridTextColumn x:Name="ProduitAuteur"
                                 Header="Auteur"
-                                Binding="{Binding auteur}"/>
+                                Binding="{Binding Auteur}"/>
 
                 <DataGridTextColumn x:Name="ProduitEditeur"
                                 Header="Editeur"
-                                Binding="{Binding editeur}"/>
+                                Binding="{Binding Editeur}"/>
                 
             </DataGrid.Columns>
 

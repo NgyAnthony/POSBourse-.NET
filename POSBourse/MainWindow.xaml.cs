@@ -28,6 +28,7 @@ namespace POSBourse
     {
         public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
+        public List<ComboboxBean> ProduitsDataComboItems { get; set; }
        
         public MainWindow()
         {
@@ -36,7 +37,8 @@ namespace POSBourse
             this.DataContext = this;
 
             ProduitsCollection = new ObservableCollection<TableProduct>();
-            ReassortDataComboItems = FormUtils.GetReassortComoboboxItems(); 
+            ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
+            ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
         }
 
         private void addProductIntoTable()
@@ -44,8 +46,7 @@ namespace POSBourse
             String prix = PrixTextBox.Text;
             prix = prix.Replace(".", ",");
             String code = CodeTextBox.Text;
-            ComboboxBean comboResult = ReassortSelectBox.SelectedItem as ComboboxBean;
-            String reassort = comboResult.Id;
+            String reassort = ReassortSelectBox.Text;
             String type = TypeSelectBox.Text;
             String titre = TitreTextBox.Text;
             String auteur = AuteurTextBox.Text;
