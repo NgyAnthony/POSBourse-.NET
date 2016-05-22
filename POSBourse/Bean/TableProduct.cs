@@ -8,12 +8,12 @@ namespace POSBourse.Bean
 {
     public class TableProduct
     {
-        public String prix { get; set; }
-        public String code { get; set; }
-        public String reassort { get; set; }
-        public String type { get; set; }
-        public String titre { get; set; }
-        public String auteur { get; set; }
-        public String editeur { get; set; }
+        public String Prix { get; set; }
+        public String Code { get; set; }
+        public String Reassort { get; set; }
+        public String Type { get; set; }
+        public String Titre { get; set; }
+        public String Auteur { get; set; }
+        public String Editeur { get; set; }
     }
 }

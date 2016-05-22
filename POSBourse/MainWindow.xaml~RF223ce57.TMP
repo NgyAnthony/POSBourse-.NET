@@ -37,7 +37,10 @@
         </DockPanel>
         <TextBox x:Name="PrixTextBox" Focusable="True" HorizontalAlignment="Left" Height="23" Margin="47,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
         <TextBox x:Name="CodeTextBox" HorizontalAlignment="Left" Height="22" Margin="124,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="ReassortSelectBox" ItemsSource="{Binding ReassortDataComboItems}" SelectedIndex="0" DisplayMemberPath="Value" SelectedValuePath="Id" Grid.Column="1" HorizontalAlignment="Left" Margin="141,52,0,0" VerticalAlignment="Top" Width="179"></ComboBox>
+        <ComboBox x:Name="ReassortSelectBox" Grid.Column="1" HorizontalAlignment="Left" Margin="141,52,0,0" VerticalAlignment="Top" Width="179">
+            <ComboBoxItem>REASSORTI</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">NON REASSORTI</ComboBoxItem>
+        </ComboBox>
         <Label Content="Prix" Margin="47,25,100,0" VerticalAlignment="Top" RenderTransformOrigin="0.576,3.077"/>
         <Label Content="Code (EAN / ISBN)" HorizontalAlignment="Left" Margin="124,26,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="114" RenderTransformOrigin="0.509,-1.385"/>
         <Label Content="Type de produit" Grid.Column="1" HorizontalAlignment="Left" Margin="341,26,0,0" VerticalAlignment="Top"/>
@@ -56,52 +59,19 @@
         <TextBox x:Name="EditeurTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="824,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" KeyDown="EditeurTextBox_KeyDown"/>
         <Label Content="Auteur" Grid.Column="1" HorizontalAlignment="Left" Margin="679,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.043,0.635"/>
         <Label Content="Editeur" Grid.Column="1" HorizontalAlignment="Left" Margin="824,25,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="ProduitsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding ProduitsCollection, Mode=TwoWay}" CanUserAddRows="False" HorizontalAlignment="Left" Margin="47,89,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="142" Width="1205">
+        <DataGrid x:Name="ProduitsDataGrid" AutoGenerateColumns="True" ItemsSource="{Binding ProduitsCollection, Mode=TwoWay}" CanUserAddRows="False" HorizontalAlignment="Left" Margin="47,89,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="142" Width="1205">
 
             <DataGrid.Columns>
-
-                <DataGridTextColumn
-                                x:Name="ProduitPrix"
-                                Header="Prix"
-                                Binding="{Binding prix}"/>
-
-                <DataGridTextColumn x:Name="ProduitCode"
-                                Header="Code (EAN / ISBN)"
-                                Binding="{Binding code}"/>
-
-                <DataGridTextColumn x:Name="ProduitTitre"
-                                Header="Titre"
-                                Binding="{Binding titre}"/>
-
                 <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
-                        Reassort
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox x:Name="ReassortSelectBoxProduits" SelectedValue="{Binding Reassort}" ItemsSource="{Binding ReassortDataComboItems,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" DisplayMemberPath="Value" SelectedValuePath="Id"></ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox x:Name="ReassortSelectBoxProduits" ItemsSource="{Binding ReassortDataComboItems,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" DisplayMemberPath="Value" SelectedValuePath="Id"></ComboBox>
+                            <ComboBox x:Name="Reassort" 
+    SelectedValue="{Binding Reassort}"
+    ItemsSource="{Binding ListData}">
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
-
                 </DataGridTemplateColumn>
-
-                <DataGridTextColumn x:Name="ProduitType"
-                                Header="Type"
-                                Binding="{Binding type}"/>
-
-                <DataGridTextColumn x:Name="ProduitAuteur"
-                                Header="Auteur"
-                                Binding="{Binding auteur}"/>
-
-                <DataGridTextColumn x:Name="ProduitEditeur"
-                                Header="Editeur"
-                                Binding="{Binding editeur}"/>
-                
             </DataGrid.Columns>
 
             <DataGrid.ContextMenu>

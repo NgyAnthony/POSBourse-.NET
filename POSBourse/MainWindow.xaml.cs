@@ -12,11 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using POSBourse.Entity;
-using POSBourse.Bean;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
+using POSBourse.Entity;
+using POSBourse.Bean;
+using POSBourse.Form;
 
 namespace POSBourse
 {
@@ -26,7 +27,8 @@ namespace POSBourse
     public partial class MainWindow : Window
     {
         public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
-
+        public List<ComboboxBean> ReassortDataComboItems { get; set; }
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +36,7 @@ namespace POSBourse
             this.DataContext = this;
 
             ProduitsCollection = new ObservableCollection<TableProduct>();
+            ReassortDataComboItems = FormUtils.GetReassortComoboboxItems(); 
         }
 
         private void addProductIntoTable()
@@ -41,7 +44,8 @@ namespace POSBourse
             String prix = PrixTextBox.Text;
             prix = prix.Replace(".", ",");
             String code = CodeTextBox.Text;
-            String reassort = ReassortSelectBox.Text;
+            ComboboxBean comboResult = ReassortSelectBox.SelectedItem as ComboboxBean;
+            String reassort = comboResult.Id;
             String type = TypeSelectBox.Text;
             String titre = TitreTextBox.Text;
             String auteur = AuteurTextBox.Text;
@@ -67,13 +71,13 @@ namespace POSBourse
 
             TableProduct tableProduct = new TableProduct
             {
-                prix = prix,
-                code = code,
-                reassort = reassort,
-                type = type,
-                titre = titre,
-                auteur = auteur,
-                editeur = editeur
+                Prix = prix,
+                Code = code,
+                Reassort = reassort,
+                Type = type,
+                Titre = titre,
+                Auteur = auteur,
+                Editeur = editeur
             };
 
             this.ProduitsCollection.Add(tableProduct);
