@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POSBourse.Bean
 {
-    class TableRemise
+    public class TableRemise
     {
         public string Client { get; set; }
         public string Valeur { get; set; }

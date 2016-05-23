@@ -136,18 +136,16 @@
             </DataGrid.ContextMenu>
         </DataGrid>
         <Label Content="ECHANGE DIRECT" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="141,254,0,0" VerticalAlignment="Top"/>
-        <DataGrid Grid.Column="1" HorizontalAlignment="Left" Margin="267,272,0,0" VerticalAlignment="Top" Height="116" Width="160">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                                x:Name="AvoirNoAvoir"
-                                Header="No Avoir" />
-                <DataGridTextColumn
-                                x:Name="AvoirCaisse"
-                                Header="Caisse" />
-                <DataGridTextColumn
-                                x:Name="AvoirMontant"
-                                Header="Montant" />
-            </DataGrid.Columns>
+        <DataGrid ItemsSource="{Binding AvoirCollection, Mode=TwoWay}" AutoGenerateColumns="True" CanUserAddRows="False" Grid.Column="1" HorizontalAlignment="Left" Margin="267,272,0,0" VerticalAlignment="Top" Height="116" Width="160">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Click="Context_Delete_Avoir">
+                        <MenuItem.Icon>
+                            <Image Width="12" Height="12" Source="Images/Delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <DataGrid Grid.Column="1" HorizontalAlignment="Left" Margin="679,272,0,0" VerticalAlignment="Top" Height="116" Width="160">
             <DataGrid.Columns>
@@ -171,12 +169,13 @@
         <TextBox x:Name="EchangeDirectValeurBox" HorizontalAlignment="Left" Height="24" Margin="131,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Grid.Column="1"/>
         <Label Content="Valeur" Grid.Column="1" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" Height="24" Width="86"/>
         <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="131,362,0,0" VerticalAlignment="Top" Width="76" Click="ValidateEchangeDirect"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="NoAvoirBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="No Avoir" Grid.Column="1" HorizontalAlignment="Left" Margin="445,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.461,0.577" Height="24" Width="89"/>
+        <TextBox x:Name="AvoirCaisseBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,309,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Valeur" Grid.Column="1" HorizontalAlignment="Left" Margin="445,338,0,0" VerticalAlignment="Top" Height="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,338,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="AvoirValeurBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,338,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Caisse" Grid.Column="1" HorizontalAlignment="Left" Margin="445,310,0,0" VerticalAlignment="Top" Height="24"/>
-        <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="539,368,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="539,368,0,0" VerticalAlignment="Top" Width="75" Click="ValidateAvoir"/>
         <Label Content="REMISE" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="1029,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.146,0.385"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="953,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Nom du client" Grid.Column="1" HorizontalAlignment="Left" Margin="859,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.461,0.577" Height="24" Width="89"/>
@@ -212,7 +211,6 @@
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="908,557,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>
         <TextBlock TextAlignment="Center" FontSize="25" HorizontalAlignment="Left" Margin="0,579,0,0" TextWrapping="Wrap" Text="A PAYER : 0.00€" VerticalAlignment="Top" Height="40" Width="1294" Grid.ColumnSpan="2" Foreground="#FF0015FF"/>
         <Button Content="VALIDER LA TRANSACTION" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Grid.Column="1" Margin="297,624,0,0" Width="333" RenderTransformOrigin="0.412,-0.725" Height="31"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="539,309,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

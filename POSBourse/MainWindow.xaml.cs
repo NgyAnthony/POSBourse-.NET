@@ -28,6 +28,7 @@ namespace POSBourse
     {
         public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
         public ObservableCollection<TableEchangeDirect> EchangeDirectCollection { get; set; }
+        public ObservableCollection<TableAvoir> AvoirCollection { get; set; }
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
         public List<ComboboxBean> ProduitsDataComboItems { get; set; }
        
@@ -39,6 +40,7 @@ namespace POSBourse
 
             ProduitsCollection = new ObservableCollection<TableProduct>();
             EchangeDirectCollection = new ObservableCollection<TableEchangeDirect>();
+            AvoirCollection = new ObservableCollection<TableAvoir>();
             ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
             ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
         }
@@ -134,7 +136,7 @@ namespace POSBourse
         private void ValidateEchangeDirect(object sender, RoutedEventArgs e)
         {
             string client = EchangeDirectNomClientBox.Text;
-            string valeur = EchangeDirectValeurBox.Text; 
+            string valeur = EchangeDirectValeurBox.Text.Replace(".", ","); 
             decimal valeurDecimal;
 
             if (client.Length == 0)
@@ -175,6 +177,57 @@ namespace POSBourse
             {
                 var toDeleteFromBindedList = (TableEchangeDirect)item.SelectedCells[0].Item;
                 EchangeDirectCollection.Remove(toDeleteFromBindedList);
+            }
+
+        }
+
+        private void ValidateAvoir(object sender, RoutedEventArgs e)
+        {
+            string noAvoir = NoAvoirBox.Text;
+            string caisse = AvoirCaisseBox.Text;
+            string valeur = AvoirValeurBox.Text.Replace(".", ",");
+            decimal valeurDecimal;
+
+            if (noAvoir.Length == 0)
+            {
+                MessageBox.Show("Le NO d'avoir est manquant !");
+                return;
+            }
+            else if (!decimal.TryParse(valeur, out valeurDecimal))
+            {
+                MessageBox.Show("La valeur est mal formatée !");
+                return;
+            }
+
+            var formattedValeur = string.Format("{0:0.00}", valeurDecimal);
+
+            AvoirCollection.Add(new TableAvoir
+            {
+                NoAvoir = noAvoir,
+                Caisse = caisse,
+                Montant = formattedValeur
+            });
+
+            NoAvoirBox.Text = "";
+            AvoirCaisseBox.Text = "";
+            AvoirValeurBox.Text = "";
+        }
+
+        private void Context_Delete_Avoir(object sender, RoutedEventArgs e)
+        {
+            //Get the clicked MenuItem
+            var menuItem = (MenuItem)sender;
+
+            //Get the ContextMenu to which the menuItem belongs
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            //Find the placementTarget
+            var item = (DataGrid)contextMenu.PlacementTarget;
+
+            if (item.SelectedCells.Count > 0)
+            {
+                var toDeleteFromBindedList = (TableAvoir)item.SelectedCells[0].Item;
+                AvoirCollection.Remove(toDeleteFromBindedList);
             }
 
         }
