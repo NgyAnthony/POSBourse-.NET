@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POSBourse.Business
+namespace POSBourse.Bean
 {
-    class TransactionManager
+    class TableAvoir
     {
-
+        public string NoAvoir { get; set; }
+        public string Caisse { get; set; }
     }
 }

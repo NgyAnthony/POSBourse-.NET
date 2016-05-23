@@ -71,7 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bean\ComboboxBean.cs" />
+    <Compile Include="Bean\TableAvoir.cs" />
+    <Compile Include="Bean\TableEchangeDirect.cs" />
     <Compile Include="Bean\TableProduct.cs" />
+    <Compile Include="Bean\TableRemise.cs" />
     <Compile Include="Business\TransactionManager.cs" />
     <Compile Include="Entity\bourse.Context.cs">
       <AutoGen>True</AutoGen>

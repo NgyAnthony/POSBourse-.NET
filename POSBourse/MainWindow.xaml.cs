@@ -27,6 +27,7 @@ namespace POSBourse
     public partial class MainWindow : Window
     {
         public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
+        public ObservableCollection<TableEchangeDirect> EchangeDirectCollection { get; set; }
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
         public List<ComboboxBean> ProduitsDataComboItems { get; set; }
        
@@ -37,14 +38,15 @@ namespace POSBourse
             this.DataContext = this;
 
             ProduitsCollection = new ObservableCollection<TableProduct>();
+            EchangeDirectCollection = new ObservableCollection<TableEchangeDirect>();
             ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
             ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
         }
 
         private void addProductIntoTable()
         {
-            String prix = PrixTextBox.Text;
-            prix = prix.Replace(".", ",");
+            String prix = PrixTextBox.Text.Replace(".", ",");
+            decimal prixDecimal;
             String code = CodeTextBox.Text;
             String reassort = ReassortSelectBox.Text;
             String type = TypeSelectBox.Text;
@@ -52,14 +54,12 @@ namespace POSBourse
             String auteur = AuteurTextBox.Text;
             String editeur = EditeurTextBox.Text;
 
-            decimal num;
-
             if (prix.Length == 0)
             {
                 MessageBox.Show("Le prix est manquant !");
                 return;
             }
-            else if (!decimal.TryParse(prix, out num))
+            else if (!decimal.TryParse(prix, out prixDecimal))
             {
                 MessageBox.Show("Le prix est mal formaté !");
                 return;
@@ -70,9 +70,11 @@ namespace POSBourse
                 return;
             }
 
+            var formattedPrice = string.Format("{0:0.00}", prixDecimal);
+
             TableProduct tableProduct = new TableProduct
             {
-                Prix = prix,
+                Prix = formattedPrice,
                 Code = code,
                 Reassort = reassort,
                 Type = type,
@@ -121,12 +123,60 @@ namespace POSBourse
             //Find the placementTarget
             var item = (DataGrid)contextMenu.PlacementTarget;
 
-            //Get the underlying item, that you cast to your object that is bound
-            //to the DataGrid (and has subject and state as property)
-            var toDeleteFromBindedList = (TableProduct)item.SelectedCells[0].Item;
+            if (item.SelectedCells.Count > 0)
+            {
+                var toDeleteFromBindedList = (TableProduct)item.SelectedCells[0].Item;
+                ProduitsCollection.Remove(toDeleteFromBindedList);
+            }
 
-            //Remove item into observable collection.
-            ProduitsCollection.Remove(toDeleteFromBindedList);
+        }
+
+        private void ValidateEchangeDirect(object sender, RoutedEventArgs e)
+        {
+            string client = EchangeDirectNomClientBox.Text;
+            string valeur = EchangeDirectValeurBox.Text; 
+            decimal valeurDecimal;
+
+            if (client.Length == 0)
+            {
+                MessageBox.Show("Le client est manquant !");
+                return;
+            }
+            else if (!decimal.TryParse(valeur, out valeurDecimal))
+            {
+                MessageBox.Show("La valeur est mal formatée !");
+                return;
+            }
+
+            var formattedValeur = string.Format("{0:0.00}", valeurDecimal);
+
+            EchangeDirectCollection.Add(new TableEchangeDirect
+            {
+                Client = client,
+                Valeur = formattedValeur
+            });
+
+            EchangeDirectNomClientBox.Text = "";
+            EchangeDirectValeurBox.Text = "";
+        }
+
+        private void Context_Delete_EchangeDirect(object sender, RoutedEventArgs e)
+        {
+            //Get the clicked MenuItem
+            var menuItem = (MenuItem)sender;
+
+            //Get the ContextMenu to which the menuItem belongs
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            //Find the placementTarget
+            var item = (DataGrid)contextMenu.PlacementTarget;
+
+            if (item.SelectedCells.Count > 0)
+            {
+                var toDeleteFromBindedList = (TableEchangeDirect)item.SelectedCells[0].Item;
+                EchangeDirectCollection.Remove(toDeleteFromBindedList);
+            }
+
         }
 
     }

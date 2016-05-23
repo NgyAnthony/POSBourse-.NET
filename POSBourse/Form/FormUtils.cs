@@ -31,5 +31,6 @@ namespace POSBourse.Form
 
             return produitsComboboxItems;
         }
+
     }
 }
