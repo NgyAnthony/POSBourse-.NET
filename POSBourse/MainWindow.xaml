@@ -147,21 +147,16 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-        <DataGrid Grid.Column="1" HorizontalAlignment="Left" Margin="679,272,0,0" VerticalAlignment="Top" Height="116" Width="160">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                            x:Name="RemiseNoAvoir"
-                            Header="Client" />
-                <DataGridTextColumn
-                            x:Name="RemiseValeur"
-                            Header="Valeur" />
-                <DataGridTextColumn
-                            x:Name="RemiseType"
-                            Header="Type" />
-                <DataGridTextColumn
-                            x:Name="RemiseMontant"
-                            Header="Montant" />
-            </DataGrid.Columns>
+        <DataGrid ItemsSource="{Binding RemiseCollection, Mode=TwoWay}" AutoGenerateColumns="True" CanUserAddRows="False" Grid.Column="1" HorizontalAlignment="Left" Margin="679,272,0,0" VerticalAlignment="Top" Height="116" Width="160">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Click="Context_Delete_Remise">
+                        <MenuItem.Icon>
+                            <Image Width="12" Height="12" Source="Images/Delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Label Content="AVOIR" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="615,254,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.146,0.385"/>
         <TextBox x:Name="EchangeDirectNomClientBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="131,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -177,13 +172,13 @@
         <Label Content="Caisse" Grid.Column="1" HorizontalAlignment="Left" Margin="445,310,0,0" VerticalAlignment="Top" Height="24"/>
         <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="539,368,0,0" VerticalAlignment="Top" Width="75" Click="ValidateAvoir"/>
         <Label Content="REMISE" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="1029,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.146,0.385"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="953,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="RemiseNomClientBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="953,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Nom du client" Grid.Column="1" HorizontalAlignment="Left" Margin="859,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.461,0.577" Height="24" Width="89"/>
         <Label Content="Valeur" Grid.Column="1" HorizontalAlignment="Left" Margin="859,342,0,0" VerticalAlignment="Top" Height="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="953,342,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="953,316,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.546,1.023"/>
+        <TextBox x:Name="RemiseValeurBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="953,342,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="RemiseTypeCombobox" ItemsSource="{Binding RemiseTypeDataComboItems}" SelectedIndex="0" DisplayMemberPath="Value" SelectedValuePath="Id" Grid.Column="1" HorizontalAlignment="Left" Margin="953,316,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.546,1.023"/>
         <Label Content="Remise en" Grid.Column="1" HorizontalAlignment="Left" Margin="859,316,0,0" VerticalAlignment="Top" Height="24"/>
-        <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="953,372,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Valider" Grid.Column="1" HorizontalAlignment="Left" Margin="953,372,0,0" VerticalAlignment="Top" Width="75" Click="ValidateRemise"/>
         <Button Content="Faire un achat" FontWeight="Bold" HorizontalAlignment="Left" Margin="45,420,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2" Height="32"/>
         <Button Content="Compter sa caisse" HorizontalAlignment="Left" Margin="45,452,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2"/>
         <Button Content="Imprimer le rapport" HorizontalAlignment="Left" Margin="45,472,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2"/>

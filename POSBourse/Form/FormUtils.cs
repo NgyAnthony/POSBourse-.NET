@@ -32,5 +32,14 @@ namespace POSBourse.Form
             return produitsComboboxItems;
         }
 
+        public static List<ComboboxBean> GetRemiseTypeComoboboxItems()
+        {
+            List<ComboboxBean> remiseTypeComboboxItems = new List<ComboboxBean>();
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "POURCENTAGE", Value = "POURCENTAGE" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "VALEUR", Value = "VALEUR" });
+
+            return remiseTypeComboboxItems;
+        }
+
     }
 }

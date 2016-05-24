@@ -29,8 +29,10 @@ namespace POSBourse
         public ObservableCollection<TableProduct> ProduitsCollection { get; set; }
         public ObservableCollection<TableEchangeDirect> EchangeDirectCollection { get; set; }
         public ObservableCollection<TableAvoir> AvoirCollection { get; set; }
+        public ObservableCollection<TableRemise> RemiseCollection { get; set; }
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
         public List<ComboboxBean> ProduitsDataComboItems { get; set; }
+        public List<ComboboxBean> RemiseTypeDataComboItems { get; set; }
        
         public MainWindow()
         {
@@ -41,8 +43,10 @@ namespace POSBourse
             ProduitsCollection = new ObservableCollection<TableProduct>();
             EchangeDirectCollection = new ObservableCollection<TableEchangeDirect>();
             AvoirCollection = new ObservableCollection<TableAvoir>();
+            RemiseCollection = new ObservableCollection<TableRemise>();
             ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
             ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
+            RemiseTypeDataComboItems = FormUtils.GetRemiseTypeComoboboxItems();
         }
 
         private void addProductIntoTable()
@@ -229,8 +233,53 @@ namespace POSBourse
                 var toDeleteFromBindedList = (TableAvoir)item.SelectedCells[0].Item;
                 AvoirCollection.Remove(toDeleteFromBindedList);
             }
-
         }
 
+        private void ValidateRemise(object sender, RoutedEventArgs e)
+        {
+            string nomClient = RemiseNomClientBox.Text;
+            string remiseType = RemiseTypeCombobox.Text;
+            string valeur = RemiseValeurBox.Text.Replace(".", ",");
+            decimal valeurDecimal;
+
+            if (!decimal.TryParse(valeur, out valeurDecimal))
+            {
+                MessageBox.Show("La valeur est mal formatée !");
+                return;
+            }
+
+            var formattedValeur = string.Format("{0:0.00}", valeurDecimal);
+
+            //TODO calcul du montant
+
+            RemiseCollection.Add(new TableRemise
+            {
+                Client = nomClient,
+                Type = remiseType,
+                Valeur = valeur
+            });
+
+            RemiseNomClientBox.Text = "";
+            RemiseValeurBox.Text = "";
+        }
+
+        private void Context_Delete_Remise(object sender, RoutedEventArgs e)
+        {
+            //Get the clicked MenuItem
+            var menuItem = (MenuItem)sender;
+
+            //Get the ContextMenu to which the menuItem belongs
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            //Find the placementTarget
+            var item = (DataGrid)contextMenu.PlacementTarget;
+
+            if (item.SelectedCells.Count > 0)
+            {
+                var toDeleteFromBindedList = (TableRemise)item.SelectedCells[0].Item;
+                RemiseCollection.Remove(toDeleteFromBindedList);
+            }
+
+        }
     }
 }
