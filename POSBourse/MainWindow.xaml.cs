@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using POSBourse.Entity;
 using POSBourse.Bean;
 using POSBourse.Form;
+using POSBourse.Business;
 
 namespace POSBourse
 {
@@ -33,6 +34,7 @@ namespace POSBourse
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
         public List<ComboboxBean> ProduitsDataComboItems { get; set; }
         public List<ComboboxBean> RemiseTypeDataComboItems { get; set; }
+        public TransactionManager TransactionManager { get; set; }
        
         public MainWindow()
         {
@@ -47,6 +49,7 @@ namespace POSBourse
             ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
             ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
             RemiseTypeDataComboItems = FormUtils.GetRemiseTypeComoboboxItems();
+            TransactionManager = new TransactionManager();
         }
 
         private void addProductIntoTable()
@@ -249,8 +252,6 @@ namespace POSBourse
             }
 
             var formattedValeur = string.Format("{0:0.00}", valeurDecimal);
-
-            //TODO calcul du montant
 
             RemiseCollection.Add(new TableRemise
             {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSBourse.Bean;
+using System.Collections.ObjectModel;
 
 namespace POSBourse.Form
 {
