@@ -17,3 +17,22 @@ c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\EntityFramework.SqlServer.xml
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\bin\Debug\fr\EntityFramework.resources.dll
 c:\users\alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\obj\Debug\POSBourse_Content.g.cs
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\POSBourse.exe.config
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.exe
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.pdb
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\POSBourse.exe
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\POSBourse.pdb
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\EntityFramework.dll
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\EntityFramework.xml
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\bin\Debug\fr\EntityFramework.resources.dll
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.csprojResolveAssemblyReference.cache
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\MainWindow.baml
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\MainWindow.g.cs
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\App.g.cs
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse_Content.g.cs
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse_MarkupCompile.cache
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.g.resources
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.Properties.Resources.resources
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.csproj.GenerateResource.Cache

@@ -34,6 +34,8 @@ namespace POSBourse
         public List<ComboboxBean> ReassortDataComboItems { get; set; }
         public List<ComboboxBean> ProduitsDataComboItems { get; set; }
         public List<ComboboxBean> RemiseTypeDataComboItems { get; set; }
+        public List<ComboboxBean> PaiementTypesDataComboItems { get; set; }
+        public List<ComboboxBean> PaiementRendreTypesDataComboItems { get; set; }
         public TransactionManager TransactionManager { get; set; }
        
         public MainWindow()
@@ -49,6 +51,8 @@ namespace POSBourse
             ReassortDataComboItems = FormUtils.GetReassortComoboboxItems();
             ProduitsDataComboItems = FormUtils.GetProduitsComoboboxItems();
             RemiseTypeDataComboItems = FormUtils.GetRemiseTypeComoboboxItems();
+            PaiementTypesDataComboItems = FormUtils.GetPaiementTypeComoboboxItems();
+            PaiementRendreTypesDataComboItems = FormUtils.GetPaiementRendreComoboboxItems();
             TransactionManager = new TransactionManager();
         }
 
@@ -241,7 +245,7 @@ namespace POSBourse
         private void ValidateRemise(object sender, RoutedEventArgs e)
         {
             string nomClient = RemiseNomClientBox.Text;
-            string remiseType = RemiseTypeCombobox.Text;
+            string remiseType = ((ComboboxBean) RemiseTypeCombobox.SelectedItem).Id;
             string valeur = RemiseValeurBox.Text.Replace(".", ",");
             decimal valeurDecimal;
 

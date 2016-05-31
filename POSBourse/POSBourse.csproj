@@ -70,6 +70,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bean\CalculResultBean.cs" />
     <Compile Include="Bean\ComboboxBean.cs" />
     <Compile Include="Bean\TableAvoir.cs" />
     <Compile Include="Bean\TableEchangeDirect.cs" />

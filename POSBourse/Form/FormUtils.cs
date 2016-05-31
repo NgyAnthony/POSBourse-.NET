@@ -36,11 +36,29 @@ namespace POSBourse.Form
         public static List<ComboboxBean> GetRemiseTypeComoboboxItems()
         {
             List<ComboboxBean> remiseTypeComboboxItems = new List<ComboboxBean>();
-            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "POURCENTAGE", Value = "POURCENTAGE" });
-            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "VALEUR", Value = "VALEUR" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "POURCENTAGE", Value = "%" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "VALEUR", Value = "€" });
 
             return remiseTypeComboboxItems;
         }
 
+        public static List<ComboboxBean> GetPaiementTypeComoboboxItems()
+        {
+            List<ComboboxBean> remiseTypeComboboxItems = new List<ComboboxBean>();
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "CB", Value = "CB" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "ESP", Value = "ESP" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "CHEQUE", Value = "CHEQUE" });
+
+            return remiseTypeComboboxItems;
+        }
+
+        public static List<ComboboxBean> GetPaiementRendreComoboboxItems()
+        {
+            List<ComboboxBean> remiseTypeComboboxItems = new List<ComboboxBean>();
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "ESP", Value = "ESP" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "AVOIR", Value = "AVOIR" });
+
+            return remiseTypeComboboxItems;
+        }
     }
 }
