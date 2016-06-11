@@ -37,6 +37,7 @@ namespace POSBourse
         public List<ComboboxBean> PaiementTypesDataComboItems { get; set; }
         public List<ComboboxBean> PaiementRendreTypesDataComboItems { get; set; }
         public TransactionManager TransactionManager { get; set; }
+        public decimal monnaiePayee;
        
         public MainWindow()
         {
@@ -110,6 +111,8 @@ namespace POSBourse
                         {
                             PrixTextBox.Focus();
                         }));
+
+            calculateOnUi();
         }
 
         private void AjouterProduitButton_Click(object sender, RoutedEventArgs e)
@@ -142,6 +145,7 @@ namespace POSBourse
                 ProduitsCollection.Remove(toDeleteFromBindedList);
             }
 
+            calculateOnUi();
         }
 
         private void ValidateEchangeDirect(object sender, RoutedEventArgs e)
@@ -171,6 +175,8 @@ namespace POSBourse
 
             EchangeDirectNomClientBox.Text = "";
             EchangeDirectValeurBox.Text = "";
+
+            calculateOnUi();
         }
 
         private void Context_Delete_EchangeDirect(object sender, RoutedEventArgs e)
@@ -190,6 +196,7 @@ namespace POSBourse
                 EchangeDirectCollection.Remove(toDeleteFromBindedList);
             }
 
+            calculateOnUi();
         }
 
         private void ValidateAvoir(object sender, RoutedEventArgs e)
@@ -222,6 +229,8 @@ namespace POSBourse
             NoAvoirBox.Text = "";
             AvoirCaisseBox.Text = "";
             AvoirValeurBox.Text = "";
+
+            calculateOnUi();
         }
 
         private void Context_Delete_Avoir(object sender, RoutedEventArgs e)
@@ -240,6 +249,8 @@ namespace POSBourse
                 var toDeleteFromBindedList = (TableAvoir)item.SelectedCells[0].Item;
                 AvoirCollection.Remove(toDeleteFromBindedList);
             }
+
+            calculateOnUi();
         }
 
         private void ValidateRemise(object sender, RoutedEventArgs e)
@@ -266,6 +277,8 @@ namespace POSBourse
 
             RemiseNomClientBox.Text = "";
             RemiseValeurBox.Text = "";
+
+            calculateOnUi();
         }
 
         private void Context_Delete_Remise(object sender, RoutedEventArgs e)
@@ -285,6 +298,33 @@ namespace POSBourse
                 RemiseCollection.Remove(toDeleteFromBindedList);
             }
 
+            calculateOnUi();
+
+        }
+
+        private void calculateOnUi()
+        {
+            CalculResultBean calculBean = TransactionManager.getFinalCalculResultBean(RemiseCollection, AvoirCollection, EchangeDirectCollection, ProduitsCollection, this.monnaiePayee);
+
+            MontantAvoirScreen.Text = calculBean.totalAvoir.ToString();
+            EchangeDirectScreen.Text = calculBean.totalEchangeDirect.ToString();
+            RemiseScreen.Text = calculBean.totalRemise.ToString();
+            ResteAPayerScreen.Text = calculBean.resteAPayer.ToString();
+            ARendreScreen.Text = calculBean.ARendre.ToString();
+            TotalAPayerScreen.Text = "A PAYER : " + calculBean.totalAPayer.ToString() + " €";
+        }
+
+        private void updateMonnaiePayee(object sender, KeyEventArgs e)
+        {
+            var monnaiePayeeStr = ResteAPayerScreen.Text;
+            
+            if (!decimal.TryParse(monnaiePayeeStr, out this.monnaiePayee))
+            {
+                this.monnaiePayee = 0;
+                return;
+            }
+
+            calculateOnUi();
         }
     }
 }

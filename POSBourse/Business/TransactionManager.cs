@@ -113,9 +113,35 @@ namespace POSBourse.Business
         public CalculResultBean getFinalCalculResultBean(ObservableCollection<TableRemise> RemiseCollection,
             ObservableCollection<TableAvoir> AvoirCollection,
             ObservableCollection<TableEchangeDirect> EchangeDirectCollection,
-            ObservableCollection<TableProduct> ProductsCollection)
+            ObservableCollection<TableProduct> ProductsCollection,
+            
+            decimal monnaiePayee)
         {
             CalculResultBean calculResultBean = getResultBeanWithoutRemises(AvoirCollection, EchangeDirectCollection, ProductsCollection);
+
+            calculResultBean.monnaiePayee = monnaiePayee;
+
+            //Calcul de la remise...
+            ObservableCollection<TableRemise> CalculatedRemiseCollection = calculateMontantRemiseFromTableRemise(RemiseCollection, ProductsCollection, AvoirCollection, EchangeDirectCollection);
+            calculResultBean.totalRemise = getRemisesSumFromCollection(CalculatedRemiseCollection);
+
+            //Calcul total à payer...
+            calculResultBean.totalAPayer = calculResultBean.totalProduits;
+
+            //Calcul des réductions
+            decimal reductions = (calculResultBean.totalAvoir + calculResultBean.totalRemise + calculResultBean.totalEchangeDirect);
+            
+            //Calcul reste à payer...
+            //Si monnaie payée est renseigné on ne fait rien car il s'agit du même textField
+            if(calculResultBean.monnaiePayee == 0)
+            {
+                calculResultBean.resteAPayer = calculResultBean.totalProduits - reductions;
+                calculResultBean.resteAPayer = Math.Abs(calculResultBean.resteAPayer);
+            }
+
+            //Calcul monnaie à rendre...
+            calculResultBean.ARendre = calculResultBean.monnaiePayee - calculResultBean.resteAPayer;
+            calculResultBean.ARendre = Math.Abs(calculResultBean.ARendre);
 
             return calculResultBean;
         }

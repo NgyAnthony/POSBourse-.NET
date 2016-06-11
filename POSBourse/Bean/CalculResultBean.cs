@@ -9,6 +9,9 @@ namespace POSBourse.Bean
     public class CalculResultBean
     {
         public decimal totalAPayer { get; set; }
+        public decimal resteAPayer { get; set; }
+        public decimal ARendre { get; set; }
+        public decimal monnaiePayee { get; set; }
         public decimal totalRemise { get; set; }
         public decimal totalAvoir { get; set; }
         public decimal totalEchangeDirect { get; set; }
