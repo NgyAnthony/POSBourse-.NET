@@ -15,6 +15,10 @@ namespace POSBourse.Bean
         public decimal totalRemise { get; set; }
         public decimal totalAvoir { get; set; }
         public decimal totalEchangeDirect { get; set; }
+        public decimal totalReductions { get; set; }
         public decimal totalProduits { get; set; }
+        public decimal ARendreAvoir { get; set; }
+        public decimal ARendreESP { get; set; }
+
     }
 }

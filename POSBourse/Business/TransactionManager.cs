@@ -130,18 +130,39 @@ namespace POSBourse.Business
 
             //Calcul des réductions
             decimal reductions = (calculResultBean.totalAvoir + calculResultBean.totalRemise + calculResultBean.totalEchangeDirect);
-            
+
             //Calcul reste à payer...
-            //Si monnaie payée est renseigné on ne fait rien car il s'agit du même textField
-            if(calculResultBean.monnaiePayee == 0)
-            {
-                calculResultBean.resteAPayer = calculResultBean.totalProduits - reductions;
-                calculResultBean.resteAPayer = Math.Abs(calculResultBean.resteAPayer);
-            }
+            calculResultBean.resteAPayer = calculResultBean.totalProduits - reductions;
+            calculResultBean.resteAPayer = Math.Abs(calculResultBean.resteAPayer);
 
             //Calcul monnaie à rendre...
             calculResultBean.ARendre = calculResultBean.monnaiePayee - calculResultBean.resteAPayer;
-            calculResultBean.ARendre = Math.Abs(calculResultBean.ARendre);
+
+            if(calculResultBean.ARendre <= 0)
+            {
+                calculResultBean.ARendre = 0;
+            }
+            else
+            {
+                calculResultBean.ARendre = Math.Abs(calculResultBean.ARendre);
+            }
+
+            //Calcul des réductions...
+            calculResultBean.totalReductions = calculResultBean.totalEchangeDirect + calculResultBean.totalAvoir + calculResultBean.totalRemise;
+
+            if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreAvoir > 0)
+            {
+                calculResultBean.ARendreESP = ((calculResultBean.totalReductions - (calculResultBean.totalProduits + calculResultBean.ARendreAvoir)) * 40) / 100;
+            }
+            else if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreESP > 0)
+            {
+                calculResultBean.ARendreAvoir = (calculResultBean.totalReductions-calculResultBean.totalProduits) - (calculResultBean.ARendreESP + (calculResultBean.ARendreESP*40)/100);
+            }
+            else if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
+            {
+                calculResultBean.ARendreAvoir = calculResultBean.totalReductions - calculResultBean.totalProduits;
+                calculResultBean.ARendreESP = (calculResultBean.ARendreAvoir*40)/100;
+            }
 
             return calculResultBean;
         }

@@ -72,6 +72,8 @@
     </Compile>
     <Compile Include="Bean\CalculResultBean.cs" />
     <Compile Include="Bean\ComboboxBean.cs" />
+    <Compile Include="Bean\MultipayBean.cs" />
+    <Compile Include="Bean\StandardKeyValueBean.cs" />
     <Compile Include="Bean\TableAvoir.cs" />
     <Compile Include="Bean\TableEchangeDirect.cs" />
     <Compile Include="Bean\TableProduct.cs" />
@@ -127,8 +129,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Popup\Multipay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Popup\Multipay.xaml.cs">
+      <DependentUpon>Multipay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

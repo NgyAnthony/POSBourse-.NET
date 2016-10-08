@@ -36,3 +36,6 @@ C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse_Ma
 C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.g.resources
 C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.Properties.Resources.resources
 C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.csproj.GenerateResource.Cache
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\Popup\Multipay.g.cs
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\POSBourse_MarkupCompile.lref
+C:\Users\alexandrenguyen\Desktop\POSBourse-.NET\POSBourse\obj\Debug\Popup\Multipay.baml

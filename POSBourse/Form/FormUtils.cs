@@ -48,6 +48,7 @@ namespace POSBourse.Form
             remiseTypeComboboxItems.Add(new ComboboxBean { Id = "CB", Value = "CB" });
             remiseTypeComboboxItems.Add(new ComboboxBean { Id = "ESP", Value = "ESP" });
             remiseTypeComboboxItems.Add(new ComboboxBean { Id = "CHEQUE", Value = "CHEQUE" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "PLUSIEURS", Value = "PLUSIEURS" });
 
             return remiseTypeComboboxItems;
         }
@@ -55,8 +56,9 @@ namespace POSBourse.Form
         public static List<ComboboxBean> GetPaiementRendreComoboboxItems()
         {
             List<ComboboxBean> remiseTypeComboboxItems = new List<ComboboxBean>();
-            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "ESP", Value = "ESP" });
             remiseTypeComboboxItems.Add(new ComboboxBean { Id = "AVOIR", Value = "AVOIR" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "ESP", Value = "ESP" });
+            remiseTypeComboboxItems.Add(new ComboboxBean { Id = "PLUSIEURS", Value = "LES DEUX" });
 
             return remiseTypeComboboxItems;
         }
