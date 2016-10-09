@@ -122,7 +122,7 @@ namespace POSBourse
                             PrixTextBox.Focus();
                         }));
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, true, false, false, false);
         }
 
         private void AjouterProduitButton_Click(object sender, RoutedEventArgs e)
@@ -155,7 +155,7 @@ namespace POSBourse
                 ProduitsCollection.Remove(toDeleteFromBindedList);
             }
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, true, false, false, false);
         }
 
         private void ValidateEchangeDirect(object sender, RoutedEventArgs e)
@@ -186,7 +186,7 @@ namespace POSBourse
             EchangeDirectNomClientBox.Text = "";
             EchangeDirectValeurBox.Text = "";
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, true, false, false);
         }
 
         private void Context_Delete_EchangeDirect(object sender, RoutedEventArgs e)
@@ -206,7 +206,7 @@ namespace POSBourse
                 EchangeDirectCollection.Remove(toDeleteFromBindedList);
             }
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, true, false, false);
         }
 
         private void ValidateAvoir(object sender, RoutedEventArgs e)
@@ -240,7 +240,7 @@ namespace POSBourse
             AvoirCaisseBox.Text = "";
             AvoirValeurBox.Text = "";
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, false, true, false);
         }
 
         private void Context_Delete_Avoir(object sender, RoutedEventArgs e)
@@ -260,7 +260,7 @@ namespace POSBourse
                 AvoirCollection.Remove(toDeleteFromBindedList);
             }
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, false, true, false);
         }
 
         private void ValidateRemise(object sender, RoutedEventArgs e)
@@ -288,7 +288,7 @@ namespace POSBourse
             RemiseNomClientBox.Text = "";
             RemiseValeurBox.Text = "";
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, false, false, true);
         }
 
         private void Context_Delete_Remise(object sender, RoutedEventArgs e)
@@ -308,11 +308,16 @@ namespace POSBourse
                 RemiseCollection.Remove(toDeleteFromBindedList);
             }
 
-            calculateOnUi(true, false);
+            calculateOnUi(true, false, false, false, false, true);
         }
 
-        private void calculateOnUi(Boolean refreshAPayerScreen, Boolean fromMultipay)
+        private void calculateOnUi(Boolean refreshAPayerScreen, Boolean fromMultipay, Boolean updateProduct, Boolean updateEchangeDirect, Boolean updateAvoir, Boolean updateRemise)
         {
+            //We reset all user entries before reculating if...
+            if(updateProduct || updateEchangeDirect || updateAvoir || updateRemise)
+            {
+                resetUserMoneyEntries();
+            }
 
             CalculResultBean calculBean = TransactionManager.getFinalCalculResultBean(RemiseCollection, AvoirCollection, EchangeDirectCollection, ProduitsCollection, this.monnaiePayeeESP, this.monnaiePayeeCB, this.monnaiePayeeCHEQUE, this.aRendreAVOIR, this.aRendreESP);
 
@@ -323,15 +328,39 @@ namespace POSBourse
 
             if (calculBean.totalReductions > calculBean.totalProduits)
             {
+                TypePaiementScreen.IsEnabled = false;
+                ARendreCombobox.IsEnabled = true;
                 ResteAPayerScreen.Text = "0";
                 ARendreScreen.Text = "0";
                 ARendreAvoirScreen.Text = (calculBean.totalReductions - calculBean.totalProduits).ToString();
             }
-            else if (refreshAPayerScreen)
+            else if(calculBean.totalReductions == calculBean.totalProduits)
             {
-                ResteAPayerScreen.Text = calculBean.resteAPayer.ToString();
+                ARendreCombobox.IsEnabled = false;
+                TypePaiementScreen.IsEnabled = false;
+                ARendreCombobox.IsEnabled = false;
+                ARendreAvoirScreen.IsEnabled = false;
+                ARendreEspScreen.IsEnabled = false;
+                ARendreAvoirScreen.Text = "0";
+                ARendreEspScreen.Text = "0";
+                ResteAPayerScreen.Text = "0";
+                ARendreScreen.Text = "0";
             }
+            else
+            {
+                if (refreshAPayerScreen)
+                {
+                    ResteAPayerScreen.Text = calculBean.resteAPayer.ToString();
+                }
 
+                ARendreAvoirScreen.Text = "0";
+                ARendreEspScreen.Text = "0";
+                ARendreCombobox.IsEnabled = false;
+                TypePaiementScreen.IsEnabled = true;
+                ARendreAvoirScreen.IsEnabled = false;
+                ARendreEspScreen.IsEnabled = false;
+            }
+            
             if (fromMultipay) {
                 ResteAPayerScreen.Text = "0";
             }
@@ -367,7 +396,7 @@ namespace POSBourse
                 }
             }
 
-            calculateOnUi(false, false);
+            calculateOnUi(false, false, false, false, false, false);
         }
 
         private void TypePaiementScreen_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -403,7 +432,7 @@ namespace POSBourse
             this.monnaiePayeeCB = multipayPopup.result.CB;
             this.monnaiePayeeCHEQUE = multipayPopup.result.CHEQUE;
 
-            calculateOnUi(true, true);
+            calculateOnUi(true, true, false, false, false, false);
 
             MultipayText.Text = "ESP = " + multipayPopup.result.ESP.ToString() + "; CB = " + multipayPopup.result.CB.ToString() + "; CHEQUE = " + multipayPopup.result.CHEQUE.ToString();
         }
@@ -468,6 +497,16 @@ namespace POSBourse
                 CalculResultBean calculBean = TransactionManager.getFinalCalculResultBean(RemiseCollection, AvoirCollection, EchangeDirectCollection, ProduitsCollection, this.monnaiePayeeESP, this.monnaiePayeeCB, this.monnaiePayeeCHEQUE, this.aRendreAVOIR, this.aRendreESP);
                 ARendreAvoirScreen.Text = calculBean.ARendreAvoir.ToString();
             }
+        }
+
+        private void resetUserMoneyEntries()
+        {
+            this.monnaiePayeeCB = 0;
+            this.monnaiePayeeCHEQUE = 0;
+            this.monnaiePayeeESP = 0;
+            this.aRendreAVOIR = 0;
+            this.aRendreESP = 0;
+            MultipayText.Text = "";
         }
     }
 }
