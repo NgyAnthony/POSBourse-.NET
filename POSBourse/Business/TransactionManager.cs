@@ -115,11 +115,32 @@ namespace POSBourse.Business
             ObservableCollection<TableEchangeDirect> EchangeDirectCollection,
             ObservableCollection<TableProduct> ProductsCollection,
             
-            decimal monnaiePayee)
+            decimal monnaiePayeeESP,
+            decimal monnaiePayeeCB,
+            decimal monnaiePayeeCHEQUE,
+            
+            decimal aRendreAVOIR,
+            decimal aRendreESP)
         {
+
             CalculResultBean calculResultBean = getResultBeanWithoutRemises(AvoirCollection, EchangeDirectCollection, ProductsCollection);
 
-            calculResultBean.monnaiePayee = monnaiePayee;
+            //Si une valeur est entrée manuellement dans la case rendreAvoir...
+            if (aRendreAVOIR > 0)
+            {
+                calculResultBean.ARendreAvoir = aRendreAVOIR;
+            }
+            else if (aRendreESP > 0)
+            {
+                calculResultBean.ARendreESP = aRendreESP;
+            }
+
+            //Calcul de la monnaie payée
+            calculResultBean.monnaiePayeeESP = monnaiePayeeESP;
+            calculResultBean.monnaiePayeeCB = monnaiePayeeCB;
+            calculResultBean.monnaiePayeeCHEQUE = monnaiePayeeCHEQUE;
+
+            calculResultBean.monnaiePayee = monnaiePayeeESP + monnaiePayeeCB + monnaiePayeeCHEQUE;
 
             //Calcul de la remise...
             ObservableCollection<TableRemise> CalculatedRemiseCollection = calculateMontantRemiseFromTableRemise(RemiseCollection, ProductsCollection, AvoirCollection, EchangeDirectCollection);
@@ -150,18 +171,30 @@ namespace POSBourse.Business
             //Calcul des réductions...
             calculResultBean.totalReductions = calculResultBean.totalEchangeDirect + calculResultBean.totalAvoir + calculResultBean.totalRemise;
 
-            if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreAvoir > 0)
+            //Si on a saisi le montant ARendreAvoir à la main...
+            if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreAvoir > 0)
             {
-                calculResultBean.ARendreESP = ((calculResultBean.totalReductions - (calculResultBean.totalProduits + calculResultBean.ARendreAvoir)) * 40) / 100;
+                calculResultBean.ARendreESP = Math.Round(((calculResultBean.totalReductions - (calculResultBean.totalProduits + calculResultBean.ARendreAvoir)) * Convert.ToDecimal(0.7142857)), 2, MidpointRounding.ToEven);
             }
-            else if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreESP > 0)
+            //Si on a saisi le montant ARendreESP à la main...
+            else if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreESP > 0)
             {
                 calculResultBean.ARendreAvoir = (calculResultBean.totalReductions-calculResultBean.totalProduits) - (calculResultBean.ARendreESP + (calculResultBean.ARendreESP*40)/100);
             }
             else if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
             {
                 calculResultBean.ARendreAvoir = calculResultBean.totalReductions - calculResultBean.totalProduits;
-                calculResultBean.ARendreESP = (calculResultBean.ARendreAvoir*40)/100;
+                calculResultBean.ARendreESP = Math.Round(calculResultBean.ARendreAvoir*Convert.ToDecimal(0.7142857), 2, MidpointRounding.ToEven);
+            }
+
+            //Controle des valeurs qui ne peuvent pas être négatives...
+            if (calculResultBean.ARendreAvoir < 0)
+            {
+                calculResultBean.ARendreAvoir = 0;
+            }
+            if (calculResultBean.ARendreESP < 0)
+            {
+                calculResultBean.ARendreESP = 0;
             }
 
             return calculResultBean;

@@ -183,10 +183,10 @@
         <Button Content="Compter sa caisse" HorizontalAlignment="Left" Margin="45,452,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2"/>
         <Button Content="Imprimer le rapport" HorizontalAlignment="Left" Margin="45,472,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2"/>
         <Button Content="Reset de la caisse" HorizontalAlignment="Left" Margin="45,492,0,0" VerticalAlignment="Top" Width="162" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="MontantAvoirScreen" Grid.Column="1" IsReadOnly = "True" HorizontalAlignment="Left" Height="24" Margin="361,444,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="EchangeDirectScreen" Grid.Column="1" IsReadOnly = "True" HorizontalAlignment="Left" Height="24" Margin="361,472,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="RemiseScreen" Grid.Column="1" IsReadOnly = "True" HorizontalAlignment="Left" Height="24" Margin="361,500,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="ResteAPayerScreen" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="332,530,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="95" KeyUp="updateMonnaiePayee"/>
+        <TextBox x:Name="MontantAvoirScreen" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="361,444,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" IsEnabled="False"/>
+        <TextBox x:Name="EchangeDirectScreen" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="361,472,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" IsEnabled="False"/>
+        <TextBox x:Name="RemiseScreen" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="361,500,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" IsEnabled="False"/>
+        <TextBox x:Name="ResteAPayerScreen" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="332,530,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="95" KeyUp="updateMonnaiePayee" IsEnabled="False"/>
         <Label Content="PAIEMENT" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="193,420,0,0" VerticalAlignment="Top" Width="72"/>
         <Label Content="Montant avoirs" Grid.Column="1" HorizontalAlignment="Left" Margin="193,444,0,0" VerticalAlignment="Top"/>
         <Label Content="Montant echanges directs" Grid.Column="1" HorizontalAlignment="Left" Margin="193,472,0,0" VerticalAlignment="Top"/>
@@ -194,11 +194,11 @@
         <ComboBox ItemsSource="{Binding PaiementTypesDataComboItems}" SelectedIndex="0" DisplayMemberPath="Value" SelectedValuePath="Id" x:Name="TypePaiementScreen" Grid.Column="1" HorizontalAlignment="Left" Margin="193,530,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="TypePaiementScreen_SelectionChanged"/>
         <ComboBox x:Name="ARendreCombobox" ItemsSource="{Binding PaiementRendreTypesDataComboItems}" SelectedIndex="0" DisplayMemberPath="Value" SelectedValuePath="Id" Grid.Column="1" HorizontalAlignment="Left" Margin="659,444,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ARendreCombobox_SelectionChanged"/>
         <Label Content="Rendre :" Grid.Column="1" HorizontalAlignment="Left" Margin="539,444,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ARendreAvoirScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="698,473,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="81" KeyUp="ARendreAvoirScreen_KeyUp"/>
-        <TextBox x:Name="ARendreEspScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="698,501,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="81" KeyUp="ARendreEspScreen_KeyUp"/>
+        <TextBox x:Name="ARendreAvoirScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="698,473,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="81" KeyUp="ARendreAvoirScreen_KeyUp" IsEnabled="False"/>
+        <TextBox x:Name="ARendreEspScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="698,501,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="81" KeyUp="ARendreEspScreen_KeyUp" IsEnabled="False"/>
         <Label Content="Entrez la valeur en avoir" Grid.Column="1" HorizontalAlignment="Left" Margin="539,473,0,0" VerticalAlignment="Top"/>
         <Label Content="Entrez la valeur en espèces" Grid.Column="1" HorizontalAlignment="Left" Margin="539,501,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ARendreScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="659,530,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ARendreScreen" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="659,530,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label Content="Valeur à rendre" Grid.Column="1" HorizontalAlignment="Left" Margin="539,532,0,0" VerticalAlignment="Top"/>
         <Label Content="A RENDRE" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" Margin="539,420,0,0" VerticalAlignment="Top" Width="72"/>
         <TextBox Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="108" Margin="908,444,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>

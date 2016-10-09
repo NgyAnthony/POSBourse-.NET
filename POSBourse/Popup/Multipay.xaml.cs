@@ -72,7 +72,6 @@ namespace POSBourse.Popup
             }
 
             this.Close();
-        
         }
 
     }

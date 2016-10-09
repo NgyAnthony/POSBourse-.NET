@@ -12,6 +12,9 @@ namespace POSBourse.Bean
         public decimal resteAPayer { get; set; }
         public decimal ARendre { get; set; }
         public decimal monnaiePayee { get; set; }
+        public decimal monnaiePayeeESP { get; set; }
+        public decimal monnaiePayeeCB { get; set; }
+        public decimal monnaiePayeeCHEQUE { get; set; }
         public decimal totalRemise { get; set; }
         public decimal totalAvoir { get; set; }
         public decimal totalEchangeDirect { get; set; }
