@@ -424,6 +424,8 @@ namespace POSBourse
             {
                 ResteAPayerScreen.IsEnabled = true;
             }
+
+            calculateOnUi(true, false, false, false, false, false);
         }
 
         void TypePaiementScreen_Closing(object sender, CancelEventArgs e)
@@ -434,6 +436,7 @@ namespace POSBourse
 
             calculateOnUi(true, true, false, false, false, false);
 
+            ResteAPayerScreen.Text = "0";
             MultipayText.Text = "ESP = " + multipayPopup.result.ESP.ToString() + "; CB = " + multipayPopup.result.CB.ToString() + "; CHEQUE = " + multipayPopup.result.CHEQUE.ToString();
         }
 
