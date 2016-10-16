@@ -11,5 +11,6 @@ namespace POSBourse.Bean
         public decimal ESP;
         public decimal CB;
         public decimal CHEQUE;
+        public decimal RESTANT;
     }
 }

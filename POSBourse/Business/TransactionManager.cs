@@ -154,7 +154,15 @@ namespace POSBourse.Business
 
             //Calcul reste à payer...
             calculResultBean.resteAPayer = calculResultBean.totalProduits - reductions;
-            calculResultBean.resteAPayer = Math.Abs(calculResultBean.resteAPayer);
+
+            if (calculResultBean.resteAPayer <= 0)
+            {
+                calculResultBean.resteAPayer = 0;
+            }
+            else
+            {
+                calculResultBean.resteAPayer = calculResultBean.resteAPayer;
+            }
 
             //Calcul monnaie à rendre...
             calculResultBean.ARendre = calculResultBean.monnaiePayee - calculResultBean.resteAPayer;
@@ -165,7 +173,7 @@ namespace POSBourse.Business
             }
             else
             {
-                calculResultBean.ARendre = Math.Abs(calculResultBean.ARendre);
+                calculResultBean.ARendre = calculResultBean.ARendre;
             }
 
             //Calcul des réductions...

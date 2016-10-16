@@ -401,11 +401,18 @@ namespace POSBourse
 
         private void TypePaiementScreen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string selectedItem = ((ComboboxBean)TypePaiementScreen.SelectedItem).Value;
+
+            if (selectedItem != "PLUSIEURS")
+            {
+                this.monnaiePayeeCB = 0;
+                this.monnaiePayeeCHEQUE = 0;
+                this.monnaiePayeeESP = 0;
+            }
+
             CalculResultBean calculBean = TransactionManager.getFinalCalculResultBean(RemiseCollection, AvoirCollection, EchangeDirectCollection, ProduitsCollection, this.monnaiePayeeESP, this.monnaiePayeeCB, this.monnaiePayeeCHEQUE, this.aRendreAVOIR, this.aRendreESP);
 
-            string selectedItem = ((ComboboxBean) TypePaiementScreen.SelectedItem).Value;
-
-            if(selectedItem == "PLUSIEURS")
+            if (selectedItem == "PLUSIEURS")
             {
                 multipayPopup = new Multipay();
                 multipayPopup.Closing += TypePaiementScreen_Closing;
@@ -417,15 +424,21 @@ namespace POSBourse
                 MultipayText.Text = "";
             }
 
-            if (selectedItem != "ESP") {
+            if (selectedItem == "ESP") {
+                ResteAPayerScreen.IsEnabled = true;
+                calculateOnUi(true, false, false, false, false, false);
+            }
+            else if(selectedItem == "PLUSIEURS")
+            {
                 ResteAPayerScreen.IsEnabled = false;
+                calculateOnUi(false, true, false, false, false, false);
             }
             else
             {
-                ResteAPayerScreen.IsEnabled = true;
+                ResteAPayerScreen.IsEnabled = false;
+                calculateOnUi(true, false, false, false, false, false);
             }
 
-            calculateOnUi(true, false, false, false, false, false);
         }
 
         void TypePaiementScreen_Closing(object sender, CancelEventArgs e)
@@ -436,7 +449,6 @@ namespace POSBourse
 
             calculateOnUi(true, true, false, false, false, false);
 
-            ResteAPayerScreen.Text = "0";
             MultipayText.Text = "ESP = " + multipayPopup.result.ESP.ToString() + "; CB = " + multipayPopup.result.CB.ToString() + "; CHEQUE = " + multipayPopup.result.CHEQUE.ToString();
         }
 
