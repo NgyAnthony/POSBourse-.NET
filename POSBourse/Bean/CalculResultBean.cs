@@ -17,11 +17,20 @@ namespace POSBourse.Bean
         public decimal monnaiePayeeCHEQUE { get; set; }
         public decimal totalRemise { get; set; }
         public decimal totalAvoir { get; set; }
+        public decimal totalEchange { get; set; }
+        public decimal totalEchangeAndAvoir { get; set; }
         public decimal totalEchangeDirect { get; set; }
         public decimal totalReductions { get; set; }
         public decimal totalProduits { get; set; }
         public decimal ARendreAvoir { get; set; }
+        public decimal avoirUtil { get; set; }
+        public decimal avoirConverti { get; set; }
         public decimal ARendreESP { get; set; }
-
+        public decimal ARendreReelESP { get; set; }
+        public decimal monnaiePayeeReelESP { get; set; }
+        public int productCount { get; set; }
+        public decimal totalEchangeAndAvoirUtil { get; set; }
+        public decimal avoirEchangeConverti { get; set; }
+        public decimal totalBonCadeau { get; set; }
     }
 }

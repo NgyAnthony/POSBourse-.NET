@@ -9,6 +9,7 @@
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="author" ColumnName="author" />
           <ScalarProperty Name="editor" ColumnName="editor" />
+          <ScalarProperty Name="type" ColumnName="type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -18,9 +19,13 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="datetime" ColumnName="datetime" />
           <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="inStock" ColumnName="inStock" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="editor" ColumnName="editor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -31,9 +36,8 @@
           <ScalarProperty Name="datetime" ColumnName="datetime" />
           <ScalarProperty Name="giftCouponValue" ColumnName="giftCouponValue" />
           <ScalarProperty Name="couponValue" ColumnName="couponValue" />
-          <ScalarProperty Name="usedCouponValue" ColumnName="usedCouponValue" />
+          <ScalarProperty Name="usedCouponExchangeValue" ColumnName="usedCouponExchangeValue" />
           <ScalarProperty Name="exchangeValue" ColumnName="exchangeValue" />
-          <ScalarProperty Name="usedExchangeValue" ColumnName="usedExchangeValue" />
           <ScalarProperty Name="convertedCouponExchangeValue" ColumnName="convertedCouponExchangeValue" />
           <ScalarProperty Name="discountOfferValue" ColumnName="discountOfferValue" />
           <ScalarProperty Name="directExchangeValue" ColumnName="directExchangeValue" />
@@ -83,6 +87,7 @@
           <ScalarProperty Name="datetime" ColumnName="datetime" />
           <ScalarProperty Name="couponType" ColumnName="couponType" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="exchange" ColumnName="exchange" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

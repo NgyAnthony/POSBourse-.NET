@@ -21,6 +21,7 @@ namespace POSBourse.Entity
         public System.DateTime datetime { get; set; }
         public string couponType { get; set; }
         public int TransactionId { get; set; }
+        public bool exchange { get; set; }
     
         public virtual Transaction Transaction { get; set; }
     }

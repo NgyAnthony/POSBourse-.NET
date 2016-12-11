@@ -11,5 +11,8 @@ namespace POSBourse.Bean
         public string NoAvoir { get; set; }
         public string Caisse { get; set; }
         public string Montant { get; set; }
+        public string Echange { get; set; }
+        public string BonCadeau { get; set; }
+        public string NC { get; set; }
     }
 }

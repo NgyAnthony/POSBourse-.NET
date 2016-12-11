@@ -29,8 +29,43 @@ namespace POSBourse.Business
 
             foreach (var avoir in AvoirCollection)
             {
-                decimal valeurDecimal = decimal.Parse(avoir.Montant);
-                valeur += valeurDecimal;
+                if(avoir.Echange == "non")
+                {
+                    decimal valeurDecimal = decimal.Parse(avoir.Montant);
+                    valeur += valeurDecimal;
+                }
+            }
+
+            return valeur;
+        }
+
+        public decimal getBonCadeauSumFromCollection(ObservableCollection<TableAvoir> AvoirCollection)
+        {
+            decimal valeur = 0;
+
+            foreach (var avoir in AvoirCollection)
+            {
+                if (avoir.BonCadeau == "oui")
+                {
+                    decimal valeurDecimal = decimal.Parse(avoir.Montant);
+                    valeur += valeurDecimal;
+                }
+            }
+
+            return valeur;
+        }
+
+        public decimal getEchangeSumFromCollection(ObservableCollection<TableAvoir> AvoirCollection)
+        {
+            decimal valeur = 0;
+
+            foreach (var avoir in AvoirCollection)
+            {
+                if (avoir.Echange == "oui")
+                {
+                    decimal valeurDecimal = decimal.Parse(avoir.Montant);
+                    valeur += valeurDecimal;
+                }
             }
 
             return valeur;
@@ -69,7 +104,7 @@ namespace POSBourse.Business
         {
             CalculResultBean resultBean = getResultBeanWithoutRemises(AvoirCollection, EchangeDirectCollection, ProductsCollection);
 
-            decimal totalAfterAvoirAndEchangeDirect = resultBean.totalProduits - (resultBean.totalAvoir + resultBean.totalEchangeDirect);
+            decimal totalAfterAvoirAndEchangeDirect = resultBean.totalProduits - (resultBean.totalEchangeAndAvoir + resultBean.totalEchangeDirect);
             
             foreach (var remise in RemiseCollection)
             {
@@ -97,6 +132,8 @@ namespace POSBourse.Business
             ObservableCollection<TableProduct> ProductsCollection)
         {
             decimal avoirsSum = getAvoirSumFromCollection(AvoirCollection);
+            decimal echangeSum = getEchangeSumFromCollection(AvoirCollection);
+            decimal bonCadeauSum = getBonCadeauSumFromCollection(AvoirCollection);
             decimal echangeDirectSum = getEchangeDirectSumFromCollection(EchangeDirectCollection);
             decimal productsSum = getProductsSumFromCollection(ProductsCollection);
             
@@ -104,7 +141,10 @@ namespace POSBourse.Business
             {
                 totalProduits = productsSum,
                 totalAvoir = avoirsSum,
-                totalEchangeDirect = echangeDirectSum
+                totalEchangeDirect = echangeDirectSum,
+                totalEchange = echangeSum,
+                totalEchangeAndAvoir = echangeSum + avoirsSum,
+                totalBonCadeau = bonCadeauSum
             };
             
             return result;
@@ -130,6 +170,7 @@ namespace POSBourse.Business
             {
                 calculResultBean.ARendreAvoir = aRendreAVOIR;
             }
+            //Si une valeur est entrée manuellement dans la case rendreEsp...
             else if (aRendreESP > 0)
             {
                 calculResultBean.ARendreESP = aRendreESP;
@@ -150,7 +191,7 @@ namespace POSBourse.Business
             calculResultBean.totalAPayer = calculResultBean.totalProduits;
 
             //Calcul des réductions
-            decimal reductions = (calculResultBean.totalAvoir + calculResultBean.totalRemise + calculResultBean.totalEchangeDirect);
+            decimal reductions = (calculResultBean.totalEchangeAndAvoir + calculResultBean.totalRemise + calculResultBean.totalEchangeDirect);
 
             //Calcul reste à payer...
             calculResultBean.resteAPayer = calculResultBean.totalProduits - reductions;
@@ -177,7 +218,7 @@ namespace POSBourse.Business
             }
 
             //Calcul des réductions...
-            calculResultBean.totalReductions = calculResultBean.totalEchangeDirect + calculResultBean.totalAvoir + calculResultBean.totalRemise;
+            calculResultBean.totalReductions = calculResultBean.totalEchangeDirect + calculResultBean.totalEchangeAndAvoir + calculResultBean.totalRemise;
 
             //Si on a saisi le montant ARendreAvoir à la main...
             if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreAvoir > 0)
@@ -203,6 +244,35 @@ namespace POSBourse.Business
             if (calculResultBean.ARendreESP < 0)
             {
                 calculResultBean.ARendreESP = 0;
+            }
+
+            //Assignation du nombre de produits
+            calculResultBean.productCount = ProductsCollection.Count();
+
+            if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
+            {
+                decimal totalAvoirEchangeConverti = Math.Round((calculResultBean.ARendreESP + (calculResultBean.ARendreESP * 40) / 100), 2, MidpointRounding.ToEven);
+
+                calculResultBean.avoirEchangeConverti = totalAvoirEchangeConverti;
+
+                decimal totalAvoirRendu = Math.Round(calculResultBean.ARendreAvoir + (calculResultBean.ARendreESP + (calculResultBean.ARendreESP * 40) / 100), 2, MidpointRounding.ToEven);
+                calculResultBean.totalEchangeAndAvoirUtil = calculResultBean.totalEchangeAndAvoir - totalAvoirRendu;
+            }
+            else
+            {
+                calculResultBean.totalEchangeAndAvoirUtil = 0;
+            }
+
+            //Calul ESP Reellement payé (sans la monnaie donnée par le client)
+            calculResultBean.monnaiePayeeReelESP = calculResultBean.monnaiePayeeESP - calculResultBean.ARendreESP;
+
+            //Si les réductions > produits alors on a surement rendu de l'ESP si avoir converti.
+            if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0) {
+                calculResultBean.ARendreReelESP = calculResultBean.ARendreESP;
+            }
+            else
+            {
+                calculResultBean.ARendreReelESP = 0;
             }
 
             return calculResultBean;

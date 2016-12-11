@@ -11,10 +11,6 @@
     <EntitySet Name="EnteredDiscountSet" EntityType="bourse.EnteredDiscount" />
     <EntitySet Name="CashInputSet" EntityType="bourse.CashInput" />
     <EntitySet Name="CashOutputSet" EntityType="bourse.CashOutput" />
-    <AssociationSet Name="ProductSoldProduct" Association="bourse.ProductSoldProduct">
-      <End Role="Product" EntitySet="ProductSet" />
-      <End Role="SoldProduct" EntitySet="SoldProductSet" />
-    </AssociationSet>
     <AssociationSet Name="TransactionSoldProduct" Association="bourse.TransactionSoldProduct">
       <End Role="Transaction" EntitySet="TransactionSet" />
       <End Role="SoldProduct" EntitySet="SoldProductSet" />
@@ -57,7 +53,7 @@
     <Property Name="title" Type="String" Nullable="false" />
     <Property Name="author" Type="String" Nullable="false" />
     <Property Name="editor" Type="String" Nullable="false" />
-    <NavigationProperty Name="SoldProduct" Relationship="bourse.ProductSoldProduct" FromRole="Product" ToRole="SoldProduct" />
+    <Property Name="type" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="SoldProduct">
     <Key>
@@ -66,11 +62,14 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <Property Name="price" Type="Decimal" Nullable="false" />
-    <NavigationProperty Name="Product" Relationship="bourse.ProductSoldProduct" FromRole="SoldProduct" ToRole="Product" />
-    <Property Name="ProductId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionSoldProduct" FromRole="SoldProduct" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
     <Property Name="inStock" Type="Boolean" Nullable="false" />
+    <Property Name="code" Type="String" Nullable="false" />
+    <Property Name="title" Type="String" Nullable="false" />
+    <Property Name="author" Type="String" Nullable="false" />
+    <Property Name="type" Type="String" Nullable="false" />
+    <Property Name="editor" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="Transaction">
     <Key>
@@ -80,9 +79,8 @@
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <Property Name="giftCouponValue" Type="Decimal" Nullable="false" />
     <Property Name="couponValue" Type="Decimal" Nullable="false" />
-    <Property Name="usedCouponValue" Type="Decimal" Nullable="false" />
+    <Property Name="usedCouponExchangeValue" Type="Decimal" Nullable="false" />
     <Property Name="exchangeValue" Type="Decimal" Nullable="false" />
-    <Property Name="usedExchangeValue" Type="Decimal" Nullable="false" />
     <Property Name="convertedCouponExchangeValue" Type="Decimal" Nullable="false" />
     <Property Name="discountOfferValue" Type="Decimal" Nullable="false" />
     <Property Name="directExchangeValue" Type="Decimal" Nullable="false" />
@@ -140,6 +138,7 @@
     <Property Name="couponType" Type="String" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredCoupon" FromRole="EnteredCoupon" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
+    <Property Name="exchange" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="EnteredDirectExchange">
     <Key>
@@ -183,18 +182,6 @@
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionCashOutput" FromRole="CashOutput" ToRole="Transaction" />
   </EntityType>
-  <Association Name="ProductSoldProduct">
-    <End Type="bourse.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="bourse.SoldProduct" Role="SoldProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SoldProduct">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="TransactionSoldProduct">
     <End Type="bourse.Transaction" Role="Transaction" Multiplicity="1" />
     <End Type="bourse.SoldProduct" Role="SoldProduct" Multiplicity="*" />

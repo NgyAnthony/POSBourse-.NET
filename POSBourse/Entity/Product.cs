@@ -14,17 +14,11 @@ namespace POSBourse.Entity
     
     public partial class Product
     {
-        public Product()
-        {
-            this.SoldProduct = new HashSet<SoldProduct>();
-        }
-    
         public int Id { get; set; }
         public string code { get; set; }
         public string title { get; set; }
         public string author { get; set; }
         public string editor { get; set; }
-    
-        public virtual ICollection<SoldProduct> SoldProduct { get; set; }
+        public string type { get; set; }
     }
 }

@@ -27,9 +27,8 @@ namespace POSBourse.Entity
         public System.DateTime datetime { get; set; }
         public decimal giftCouponValue { get; set; }
         public decimal couponValue { get; set; }
-        public decimal usedCouponValue { get; set; }
+        public decimal usedCouponExchangeValue { get; set; }
         public decimal exchangeValue { get; set; }
-        public decimal usedExchangeValue { get; set; }
         public decimal convertedCouponExchangeValue { get; set; }
         public decimal discountOfferValue { get; set; }
         public decimal directExchangeValue { get; set; }

@@ -11,10 +11,6 @@
     <EntitySet Name="EnteredDiscountSet" EntityType="bourse.Store.EnteredDiscountSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CashInputSet" EntityType="bourse.Store.CashInputSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CashOutputSet" EntityType="bourse.Store.CashOutputSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ProductSoldProduct" Association="bourse.Store.ProductSoldProduct">
-      <End Role="Product" EntitySet="ProductSet" />
-      <End Role="SoldProduct" EntitySet="SoldProductSet" />
-    </AssociationSet>
     <AssociationSet Name="TransactionSoldProduct" Association="bourse.Store.TransactionSoldProduct">
       <End Role="Transaction" EntitySet="TransactionSet" />
       <End Role="SoldProduct" EntitySet="SoldProductSet" />
@@ -57,6 +53,7 @@
     <Property Name="title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="author" Type="nvarchar(max)" Nullable="false" />
     <Property Name="editor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SoldProductSet">
     <Key>
@@ -65,9 +62,13 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="datetime" Type="datetime" Nullable="false" />
     <Property Name="price" Type="decimal" Nullable="false" />
-    <Property Name="ProductId" Type="int" Nullable="true" />
     <Property Name="TransactionId" Type="int" Nullable="false" />
     <Property Name="inStock" Type="bit" Nullable="false" />
+    <Property Name="code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="author" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editor" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="TransactionSet">
     <Key>
@@ -77,9 +78,8 @@
     <Property Name="datetime" Type="datetime" Nullable="false" />
     <Property Name="giftCouponValue" Type="decimal" Nullable="false" />
     <Property Name="couponValue" Type="decimal" Nullable="false" />
-    <Property Name="usedCouponValue" Type="decimal" Nullable="false" />
+    <Property Name="usedCouponExchangeValue" Type="decimal" Nullable="false" />
     <Property Name="exchangeValue" Type="decimal" Nullable="false" />
-    <Property Name="usedExchangeValue" Type="decimal" Nullable="false" />
     <Property Name="convertedCouponExchangeValue" Type="decimal" Nullable="false" />
     <Property Name="discountOfferValue" Type="decimal" Nullable="false" />
     <Property Name="directExchangeValue" Type="decimal" Nullable="false" />
@@ -127,6 +127,7 @@
     <Property Name="datetime" Type="datetime" Nullable="false" />
     <Property Name="couponType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="exchange" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="EnteredDirectExchangeSet1">
     <Key>
@@ -168,18 +169,6 @@
     <Property Name="datetime" Type="datetime" Nullable="false" />
     <Property Name="Transaction_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="ProductSoldProduct">
-    <End Role="Product" Type="bourse.Store.ProductSet" Multiplicity="0..1" />
-    <End Role="SoldProduct" Type="bourse.Store.SoldProductSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SoldProduct">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="TransactionSoldProduct">
     <End Role="Transaction" Type="bourse.Store.TransactionSet" Multiplicity="1" />
     <End Role="SoldProduct" Type="bourse.Store.SoldProductSet" Multiplicity="*" />

@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="957726660b5f4ddba0f6e210fc4f0cd5" Name="Diagram1" >
         <EntityTypeShape EntityType="bourse.Product" Width="1.5" PointX="0.875" PointY="0.875" />
-        <EntityTypeShape EntityType="bourse.SoldProduct" Width="1.5" PointX="3.5" PointY="0.875" />
+        <EntityTypeShape EntityType="bourse.SoldProduct" Width="1.5" PointX="3.625" PointY="0.5" />
         <EntityTypeShape EntityType="bourse.Transaction" Width="1.5" PointX="8.5" PointY="0.5" />
         <EntityTypeShape EntityType="bourse.BuyTransaction" Width="1.5" PointX="0.5" PointY="3.5" />
         <EntityTypeShape EntityType="bourse.EmittedCoupon" Width="1.5" PointX="3.875" PointY="3.5" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="bourse.EnteredDiscount" Width="1.5" PointX="0.5" PointY="6.75" />
         <EntityTypeShape EntityType="bourse.CashInput" Width="1.5" PointX="2.375" PointY="6.75" />
         <EntityTypeShape EntityType="bourse.CashOutput" Width="1.5" PointX="4.375" PointY="6.75" />
-        <AssociationConnector Association="bourse.ProductSoldProduct" />
         <AssociationConnector Association="bourse.TransactionSoldProduct" />
         <AssociationConnector Association="bourse.TransactionBuyTransaction" />
         <AssociationConnector Association="bourse.TransactionCashOutput" />

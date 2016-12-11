@@ -17,11 +17,14 @@ namespace POSBourse.Entity
         public int Id { get; set; }
         public System.DateTime datetime { get; set; }
         public decimal price { get; set; }
-        public Nullable<int> ProductId { get; set; }
         public int TransactionId { get; set; }
         public bool inStock { get; set; }
+        public string code { get; set; }
+        public string title { get; set; }
+        public string author { get; set; }
+        public string type { get; set; }
+        public string editor { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Transaction Transaction { get; set; }
     }
 }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/21/2015 15:21:04
--- Generated from EDMX file: C:\Users\Alexandre\documents\visual studio 2013\Projects\POSBourse\POSBourse\Entity\bourse.edmx
+-- Date Created: 12/12/2016 00:46:45
+-- Generated from EDMX file: C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\Entity\bourse.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,9 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ProductSoldProduct]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SoldProductSet] DROP CONSTRAINT [FK_ProductSoldProduct];
-GO
 IF OBJECT_ID(N'[dbo].[FK_TransactionSoldProduct]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SoldProductSet] DROP CONSTRAINT [FK_TransactionSoldProduct];
 GO
@@ -90,7 +87,8 @@ CREATE TABLE [dbo].[ProductSet] (
     [code] nvarchar(max)  NOT NULL,
     [title] nvarchar(max)  NOT NULL,
     [author] nvarchar(max)  NOT NULL,
-    [editor] nvarchar(max)  NOT NULL
+    [editor] nvarchar(max)  NOT NULL,
+    [type] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -99,9 +97,13 @@ CREATE TABLE [dbo].[SoldProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [datetime] datetime  NOT NULL,
     [price] decimal(18,0)  NOT NULL,
-    [ProductId] int  NULL,
     [TransactionId] int  NOT NULL,
-    [inStock] bit  NOT NULL
+    [inStock] bit  NOT NULL,
+    [code] nvarchar(max)  NOT NULL,
+    [title] nvarchar(max)  NOT NULL,
+    [author] nvarchar(max)  NOT NULL,
+    [type] nvarchar(max)  NOT NULL,
+    [editor] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -111,9 +113,8 @@ CREATE TABLE [dbo].[TransactionSet] (
     [datetime] datetime  NOT NULL,
     [giftCouponValue] decimal(18,0)  NOT NULL,
     [couponValue] decimal(18,0)  NOT NULL,
-    [usedCouponValue] decimal(18,0)  NOT NULL,
+    [usedCouponExchangeValue] decimal(18,0)  NOT NULL,
     [exchangeValue] decimal(18,0)  NOT NULL,
-    [usedExchangeValue] decimal(18,0)  NOT NULL,
     [convertedCouponExchangeValue] decimal(18,0)  NOT NULL,
     [discountOfferValue] decimal(18,0)  NOT NULL,
     [directExchangeValue] decimal(18,0)  NOT NULL,
@@ -160,7 +161,8 @@ CREATE TABLE [dbo].[EnteredCouponSet1] (
     [store] nvarchar(max)  NOT NULL,
     [datetime] datetime  NOT NULL,
     [couponType] nvarchar(max)  NOT NULL,
-    [TransactionId] int  NOT NULL
+    [TransactionId] int  NOT NULL,
+    [exchange] bit  NOT NULL
 );
 GO
 
@@ -272,20 +274,6 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [ProductId] in table 'SoldProductSet'
-ALTER TABLE [dbo].[SoldProductSet]
-ADD CONSTRAINT [FK_ProductSoldProduct]
-    FOREIGN KEY ([ProductId])
-    REFERENCES [dbo].[ProductSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProductSoldProduct'
-CREATE INDEX [IX_FK_ProductSoldProduct]
-ON [dbo].[SoldProductSet]
-    ([ProductId]);
-GO
-
 -- Creating foreign key on [TransactionId] in table 'SoldProductSet'
 ALTER TABLE [dbo].[SoldProductSet]
 ADD CONSTRAINT [FK_TransactionSoldProduct]
@@ -293,6 +281,7 @@ ADD CONSTRAINT [FK_TransactionSoldProduct]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionSoldProduct'
 CREATE INDEX [IX_FK_TransactionSoldProduct]
@@ -307,6 +296,7 @@ ADD CONSTRAINT [FK_TransactionBuyTransaction]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionBuyTransaction'
 CREATE INDEX [IX_FK_TransactionBuyTransaction]
@@ -321,6 +311,7 @@ ADD CONSTRAINT [FK_TransactionCashOutput]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionCashOutput'
 CREATE INDEX [IX_FK_TransactionCashOutput]
@@ -335,6 +326,7 @@ ADD CONSTRAINT [FK_TransactionCashInput]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionCashInput'
 CREATE INDEX [IX_FK_TransactionCashInput]
@@ -349,6 +341,7 @@ ADD CONSTRAINT [FK_TransactionEmittedCoupon]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionEmittedCoupon'
 CREATE INDEX [IX_FK_TransactionEmittedCoupon]
@@ -363,6 +356,7 @@ ADD CONSTRAINT [FK_TransactionEnteredCoupon]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionEnteredCoupon'
 CREATE INDEX [IX_FK_TransactionEnteredCoupon]
@@ -377,6 +371,7 @@ ADD CONSTRAINT [FK_TransactionEnteredDirectExchange]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionEnteredDirectExchange'
 CREATE INDEX [IX_FK_TransactionEnteredDirectExchange]
@@ -391,6 +386,7 @@ ADD CONSTRAINT [FK_TransactionEnteredDiscount]
     REFERENCES [dbo].[TransactionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TransactionEnteredDiscount'
 CREATE INDEX [IX_FK_TransactionEnteredDiscount]
