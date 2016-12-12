@@ -12,17 +12,10 @@ namespace POSBourse.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class EnteredCoupon
+    public partial class Parameters
     {
         public int Id { get; set; }
-        public decimal value { get; set; }
-        public string store { get; set; }
-        public System.DateTime datetime { get; set; }
-        public string transactionSpecificity { get; set; }
-        public int TransactionId { get; set; }
-        public bool exchange { get; set; }
-        public string onlyOn { get; set; }
-    
-        public virtual Transaction Transaction { get; set; }
+        public string key { get; set; }
+        public string value { get; set; }
     }
 }

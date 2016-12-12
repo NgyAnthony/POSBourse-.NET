@@ -51,6 +51,7 @@
           <ScalarProperty Name="totalBuyValue" ColumnName="totalBuyValue" />
           <ScalarProperty Name="productCount" ColumnName="productCount" />
           <ScalarProperty Name="store" ColumnName="store" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -67,7 +68,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(bourse.EmittedCoupon)">
         <MappingFragment StoreEntitySet="EmittedCouponSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="couponID" ColumnName="couponID" />
           <ScalarProperty Name="onlyOn" ColumnName="onlyOn" />
           <ScalarProperty Name="transactionSpecificity" ColumnName="transactionSpecificity" />
           <ScalarProperty Name="policeBookID" ColumnName="policeBookID" />
@@ -81,13 +81,13 @@
       <EntityTypeMapping TypeName="IsTypeOf(bourse.EnteredCoupon)">
         <MappingFragment StoreEntitySet="EnteredCouponSet1">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="couponID" ColumnName="couponID" />
           <ScalarProperty Name="value" ColumnName="value" />
           <ScalarProperty Name="store" ColumnName="store" />
           <ScalarProperty Name="datetime" ColumnName="datetime" />
-          <ScalarProperty Name="couponType" ColumnName="couponType" />
+          <ScalarProperty Name="transactionSpecificity" ColumnName="transactionSpecificity" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="exchange" ColumnName="exchange" />
+          <ScalarProperty Name="onlyOn" ColumnName="onlyOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -130,6 +130,15 @@
           <ScalarProperty Name="reason" ColumnName="reason" />
           <ScalarProperty Name="value" ColumnName="value" />
           <ScalarProperty Name="datetime" ColumnName="datetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParametersSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bourse.Parameters)">
+        <MappingFragment StoreEntitySet="ParametersSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="key" ColumnName="key" />
+          <ScalarProperty Name="value" ColumnName="value" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -43,6 +43,7 @@
       <End Role="Transaction" EntitySet="TransactionSet" />
       <End Role="EnteredDiscount" EntitySet="EnteredDiscountSet" />
     </AssociationSet>
+    <EntitySet Name="ParametersSet" EntityType="bourse.Parameters" />
   </EntityContainer>
   <EntityType Name="Product">
     <Key>
@@ -50,9 +51,9 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="code" Type="String" Nullable="false" />
-    <Property Name="title" Type="String" Nullable="false" />
-    <Property Name="author" Type="String" Nullable="false" />
-    <Property Name="editor" Type="String" Nullable="false" />
+    <Property Name="title" Type="String" Nullable="true" />
+    <Property Name="author" Type="String" Nullable="true" />
+    <Property Name="editor" Type="String" Nullable="true" />
     <Property Name="type" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="SoldProduct">
@@ -65,11 +66,11 @@
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionSoldProduct" FromRole="SoldProduct" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
     <Property Name="inStock" Type="Boolean" Nullable="false" />
-    <Property Name="code" Type="String" Nullable="false" />
-    <Property Name="title" Type="String" Nullable="false" />
-    <Property Name="author" Type="String" Nullable="false" />
-    <Property Name="type" Type="String" Nullable="false" />
-    <Property Name="editor" Type="String" Nullable="false" />
+    <Property Name="code" Type="String" Nullable="true" />
+    <Property Name="title" Type="String" Nullable="true" />
+    <Property Name="author" Type="String" Nullable="true" />
+    <Property Name="type" Type="String" Nullable="true" />
+    <Property Name="editor" Type="String" Nullable="true" />
   </EntityType>
   <EntityType Name="Transaction">
     <Key>
@@ -102,6 +103,7 @@
     <NavigationProperty Name="EnteredCoupon" Relationship="bourse.TransactionEnteredCoupon" FromRole="Transaction" ToRole="EnteredCoupon" />
     <NavigationProperty Name="EnteredDirectExchange" Relationship="bourse.TransactionEnteredDirectExchange" FromRole="Transaction" ToRole="EnteredDirectExchange" />
     <NavigationProperty Name="EnteredDiscount" Relationship="bourse.TransactionEnteredDiscount" FromRole="Transaction" ToRole="EnteredDiscount" />
+    <Property Name="transactionType" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="BuyTransaction">
     <Key>
@@ -117,11 +119,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="couponID" Type="String" Nullable="false" />
-    <Property Name="onlyOn" Type="String" Nullable="false" />
-    <Property Name="transactionSpecificity" Type="String" Nullable="false" />
-    <Property Name="policeBookID" Type="String" Nullable="false" />
-    <Property Name="value" Type="String" Nullable="false" />
+    <Property Name="onlyOn" Type="String" Nullable="true" />
+    <Property Name="transactionSpecificity" Type="String" Nullable="true" />
+    <Property Name="policeBookID" Type="String" Nullable="true" />
+    <Property Name="value" Type="Decimal" Nullable="false" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEmittedCoupon" FromRole="EmittedCoupon" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
@@ -131,22 +132,22 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="couponID" Type="String" Nullable="false" />
-    <Property Name="value" Type="String" Nullable="false" />
-    <Property Name="store" Type="String" Nullable="false" />
+    <Property Name="value" Type="Decimal" Nullable="false" />
+    <Property Name="store" Type="String" Nullable="true" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
-    <Property Name="couponType" Type="String" Nullable="false" />
+    <Property Name="transactionSpecificity" Type="String" Nullable="true" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredCoupon" FromRole="EnteredCoupon" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
     <Property Name="exchange" Type="Boolean" Nullable="false" />
+    <Property Name="onlyOn" Type="String" Nullable="true" />
   </EntityType>
   <EntityType Name="EnteredDirectExchange">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="datetime" Type="String" Nullable="false" />
-    <Property Name="clientName" Type="String" Nullable="false" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" />
+    <Property Name="clientName" Type="String" Nullable="true" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredDirectExchange" FromRole="EnteredDirectExchange" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -157,7 +158,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="discountType" Type="String" Nullable="false" />
     <Property Name="discountValue" Type="Decimal" Nullable="false" />
-    <Property Name="clientName" Type="String" Nullable="false" />
+    <Property Name="clientName" Type="String" Nullable="true" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionEnteredDiscount" FromRole="EnteredDiscount" ToRole="Transaction" />
     <Property Name="TransactionId" Type="Int32" Nullable="false" />
@@ -167,7 +168,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="reason" Type="String" Nullable="false" />
+    <Property Name="reason" Type="String" Nullable="true" />
     <Property Name="value" Type="String" Nullable="false" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionCashInput" FromRole="CashInput" ToRole="Transaction" />
@@ -177,7 +178,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="reason" Type="String" Nullable="false" />
+    <Property Name="reason" Type="String" Nullable="true" />
     <Property Name="value" Type="String" Nullable="false" />
     <Property Name="datetime" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Transaction" Relationship="bourse.TransactionCashOutput" FromRole="CashOutput" ToRole="Transaction" />
@@ -254,4 +255,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Parameters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="key" Type="String" Nullable="false" />
+    <Property Name="value" Type="String" Nullable="false" />
+  </EntityType>
 </Schema>

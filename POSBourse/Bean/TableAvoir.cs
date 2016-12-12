@@ -14,5 +14,6 @@ namespace POSBourse.Bean
         public string Echange { get; set; }
         public string BonCadeau { get; set; }
         public string NC { get; set; }
+        public string UniquementCD { get; set; }
     }
 }

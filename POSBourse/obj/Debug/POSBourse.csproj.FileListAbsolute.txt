@@ -61,3 +61,5 @@ C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBours
 C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.g.resources
 C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.Properties.Resources.resources
 C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\obj\Debug\POSBourse.csproj.GenerateResource.Cache
+C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\obj\Debug\Popup\EmittedCouponSpecificities.g.cs
+C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\obj\Debug\Popup\EmittedCouponSpecificities.baml

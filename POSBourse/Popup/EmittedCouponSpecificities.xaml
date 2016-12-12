@@ -1,0 +1,16 @@
+﻿<Window x:Class="POSBourse.Popup.EmittedCouponSpecificities"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POSBourse.Popup"
+        mc:Ignorable="d"
+        Title="Type d'avoir à imprimer" Height="150" Width="500">
+    <Grid>
+        <Button x:Name="EmittedCouponValidateButton" Content="Valider" HorizontalAlignment="Left" Margin="208,92,0,0" VerticalAlignment="Top" Width="75" Click="EmittedCouponValidateButton_Click"/>
+        <CheckBox x:Name="EmittedCouponOnlyCDCheckbox" Content="CD Uniquement" HorizontalAlignment="Left" Margin="89,57,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="EmittedCouponNCCheckbox" Content="NC Non convertible" HorizontalAlignment="Left" Margin="301,60,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Imprimer quel type d'avoir ?" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

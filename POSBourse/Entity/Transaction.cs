@@ -42,6 +42,7 @@ namespace POSBourse.Entity
         public decimal totalBuyValue { get; set; }
         public long productCount { get; set; }
         public string store { get; set; }
+        public string transactionType { get; set; }
     
         public virtual ICollection<SoldProduct> SoldProduct { get; set; }
         public virtual BuyTransaction BuyTransaction { get; set; }

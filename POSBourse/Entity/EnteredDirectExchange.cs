@@ -15,7 +15,7 @@ namespace POSBourse.Entity
     public partial class EnteredDirectExchange
     {
         public int Id { get; set; }
-        public string datetime { get; set; }
+        public System.DateTime datetime { get; set; }
         public string clientName { get; set; }
         public int TransactionId { get; set; }
     

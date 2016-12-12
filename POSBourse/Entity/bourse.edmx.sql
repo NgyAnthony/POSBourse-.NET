@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/12/2016 00:46:45
+-- Date Created: 12/12/2016 19:17:41
 -- Generated from EDMX file: C:\Users\Alexandre\Documents\Visual Studio 2015\Projects\POSBourse-.NET\POSBourse\Entity\bourse.edmx
 -- --------------------------------------------------
 
@@ -76,6 +76,9 @@ GO
 IF OBJECT_ID(N'[dbo].[CashOutputSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CashOutputSet];
 GO
+IF OBJECT_ID(N'[dbo].[ParametersSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ParametersSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -85,9 +88,9 @@ GO
 CREATE TABLE [dbo].[ProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [code] nvarchar(max)  NOT NULL,
-    [title] nvarchar(max)  NOT NULL,
-    [author] nvarchar(max)  NOT NULL,
-    [editor] nvarchar(max)  NOT NULL,
+    [title] nvarchar(max)  NULL,
+    [author] nvarchar(max)  NULL,
+    [editor] nvarchar(max)  NULL,
     [type] nvarchar(max)  NOT NULL
 );
 GO
@@ -99,11 +102,11 @@ CREATE TABLE [dbo].[SoldProductSet] (
     [price] decimal(18,0)  NOT NULL,
     [TransactionId] int  NOT NULL,
     [inStock] bit  NOT NULL,
-    [code] nvarchar(max)  NOT NULL,
-    [title] nvarchar(max)  NOT NULL,
-    [author] nvarchar(max)  NOT NULL,
-    [type] nvarchar(max)  NOT NULL,
-    [editor] nvarchar(max)  NOT NULL
+    [code] nvarchar(max)  NULL,
+    [title] nvarchar(max)  NULL,
+    [author] nvarchar(max)  NULL,
+    [type] nvarchar(max)  NULL,
+    [editor] nvarchar(max)  NULL
 );
 GO
 
@@ -127,7 +130,8 @@ CREATE TABLE [dbo].[TransactionSet] (
     [totalSalesValue] decimal(18,0)  NOT NULL,
     [totalBuyValue] decimal(18,0)  NOT NULL,
     [productCount] bigint  NOT NULL,
-    [store] nvarchar(max)  NOT NULL
+    [store] nvarchar(max)  NOT NULL,
+    [transactionType] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -143,11 +147,10 @@ GO
 -- Creating table 'EmittedCouponSet'
 CREATE TABLE [dbo].[EmittedCouponSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [couponID] nvarchar(max)  NOT NULL,
-    [onlyOn] nvarchar(max)  NOT NULL,
-    [transactionSpecificity] nvarchar(max)  NOT NULL,
-    [policeBookID] nvarchar(max)  NOT NULL,
-    [value] nvarchar(max)  NOT NULL,
+    [onlyOn] nvarchar(max)  NULL,
+    [transactionSpecificity] nvarchar(max)  NULL,
+    [policeBookID] nvarchar(max)  NULL,
+    [value] decimal(18,0)  NOT NULL,
     [datetime] datetime  NOT NULL,
     [TransactionId] int  NOT NULL
 );
@@ -156,21 +159,21 @@ GO
 -- Creating table 'EnteredCouponSet1'
 CREATE TABLE [dbo].[EnteredCouponSet1] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [couponID] nvarchar(max)  NOT NULL,
-    [value] nvarchar(max)  NOT NULL,
-    [store] nvarchar(max)  NOT NULL,
+    [value] decimal(18,0)  NOT NULL,
+    [store] nvarchar(max)  NULL,
     [datetime] datetime  NOT NULL,
-    [couponType] nvarchar(max)  NOT NULL,
+    [transactionSpecificity] nvarchar(max)  NULL,
     [TransactionId] int  NOT NULL,
-    [exchange] bit  NOT NULL
+    [exchange] bit  NOT NULL,
+    [onlyOn] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'EnteredDirectExchangeSet1'
 CREATE TABLE [dbo].[EnteredDirectExchangeSet1] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [datetime] nvarchar(max)  NOT NULL,
-    [clientName] nvarchar(max)  NOT NULL,
+    [datetime] datetime  NOT NULL,
+    [clientName] nvarchar(max)  NULL,
     [TransactionId] int  NOT NULL
 );
 GO
@@ -180,7 +183,7 @@ CREATE TABLE [dbo].[EnteredDiscountSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [discountType] nvarchar(max)  NOT NULL,
     [discountValue] decimal(18,0)  NOT NULL,
-    [clientName] nvarchar(max)  NOT NULL,
+    [clientName] nvarchar(max)  NULL,
     [datetime] datetime  NOT NULL,
     [TransactionId] int  NOT NULL
 );
@@ -189,7 +192,7 @@ GO
 -- Creating table 'CashInputSet'
 CREATE TABLE [dbo].[CashInputSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [reason] nvarchar(max)  NOT NULL,
+    [reason] nvarchar(max)  NULL,
     [value] nvarchar(max)  NOT NULL,
     [datetime] datetime  NOT NULL,
     [Transaction_Id] int  NOT NULL
@@ -199,10 +202,18 @@ GO
 -- Creating table 'CashOutputSet'
 CREATE TABLE [dbo].[CashOutputSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [reason] nvarchar(max)  NOT NULL,
+    [reason] nvarchar(max)  NULL,
     [value] nvarchar(max)  NOT NULL,
     [datetime] datetime  NOT NULL,
     [Transaction_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'ParametersSet'
+CREATE TABLE [dbo].[ParametersSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [key] nvarchar(max)  NOT NULL,
+    [value] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -267,6 +278,12 @@ GO
 -- Creating primary key on [Id] in table 'CashOutputSet'
 ALTER TABLE [dbo].[CashOutputSet]
 ADD CONSTRAINT [PK_CashOutputSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ParametersSet'
+ALTER TABLE [dbo].[ParametersSet]
+ADD CONSTRAINT [PK_ParametersSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

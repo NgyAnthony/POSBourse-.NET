@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using POSBourse.Bean;
+using POSBourse.Enum;
 
 namespace POSBourse.Business
 {
@@ -108,7 +109,7 @@ namespace POSBourse.Business
             
             foreach (var remise in RemiseCollection)
             {
-                if(remise.Type == "POURCENTAGE")
+                if(remise.Type == RemiseType.POURCENTAGE.ToString())
                 {
                     decimal valeurRemiseDecimal = decimal.Parse(remise.Valeur);
 
@@ -118,7 +119,7 @@ namespace POSBourse.Business
 
                     remise.Montant = string.Format("{0:0.00}", totalAfterAvoirAndEchangeDirect);
                 }
-                else if(remise.Type == "VALEUR")
+                else if(remise.Type == RemiseType.VALEUR.ToString())
                 {
                     remise.Montant = remise.Valeur;
                 }
@@ -154,13 +155,16 @@ namespace POSBourse.Business
             ObservableCollection<TableAvoir> AvoirCollection,
             ObservableCollection<TableEchangeDirect> EchangeDirectCollection,
             ObservableCollection<TableProduct> ProductsCollection,
-            
+
             decimal monnaiePayeeESP,
             decimal monnaiePayeeCB,
             decimal monnaiePayeeCHEQUE,
-            
-            decimal aRendreAVOIR,
-            decimal aRendreESP)
+
+            decimal aRendreAVOIR, //Valeur entrée manuellement
+            decimal aRendreESP, //Valeur entrée manuellement
+
+            PaiementTypeEnum aRendreType //Valeur choisie manuellement
+            )
         {
 
             CalculResultBean calculResultBean = getResultBeanWithoutRemises(AvoirCollection, EchangeDirectCollection, ProductsCollection);
@@ -208,7 +212,7 @@ namespace POSBourse.Business
             //Calcul monnaie à rendre...
             calculResultBean.ARendre = calculResultBean.monnaiePayee - calculResultBean.resteAPayer;
 
-            if(calculResultBean.ARendre <= 0)
+            if (calculResultBean.ARendre <= 0)
             {
                 calculResultBean.ARendre = 0;
             }
@@ -228,16 +232,22 @@ namespace POSBourse.Business
             //Si on a saisi le montant ARendreESP à la main...
             else if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0 && calculResultBean.ARendreESP > 0)
             {
-                calculResultBean.ARendreAvoir = (calculResultBean.totalReductions-calculResultBean.totalProduits) - (calculResultBean.ARendreESP + (calculResultBean.ARendreESP*40)/100);
+                calculResultBean.ARendreAvoir = (calculResultBean.totalReductions - calculResultBean.totalProduits) - (calculResultBean.ARendreESP + (calculResultBean.ARendreESP * 40) / 100);
             }
-            else if(calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
+            //Si rien n'a été entré à la main et que AVOIR est choisi, on evalue l'avoir à rendre par défaut.
+            else if (aRendreType == PaiementTypeEnum.AVOIR && calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
             {
                 calculResultBean.ARendreAvoir = calculResultBean.totalReductions - calculResultBean.totalProduits;
-                calculResultBean.ARendreESP = Math.Round(calculResultBean.ARendreAvoir*Convert.ToDecimal(0.7142857), 2, MidpointRounding.ToEven);
+                calculResultBean.ARendreESP = 0;
+            }
+            else if (aRendreType == PaiementTypeEnum.ESP && calculResultBean.totalReductions - calculResultBean.totalProduits > 0)
+            {
+                calculResultBean.ARendreAvoir = 0;
+                calculResultBean.ARendreESP = Math.Round(((calculResultBean.totalReductions - calculResultBean.totalProduits) * Convert.ToDecimal(0.7142857)), 2, MidpointRounding.ToEven);
             }
 
-            //Controle des valeurs qui ne peuvent pas être négatives...
-            if (calculResultBean.ARendreAvoir < 0)
+                //Controle des valeurs qui ne peuvent pas être négatives...
+                if (calculResultBean.ARendreAvoir < 0)
             {
                 calculResultBean.ARendreAvoir = 0;
             }
@@ -265,6 +275,11 @@ namespace POSBourse.Business
 
             //Calul ESP Reellement payé (sans la monnaie donnée par le client)
             calculResultBean.monnaiePayeeReelESP = calculResultBean.monnaiePayeeESP - calculResultBean.ARendreESP;
+
+            if (calculResultBean.monnaiePayeeReelESP < 0)
+            {
+                calculResultBean.monnaiePayeeReelESP = 0;
+            }
 
             //Si les réductions > produits alors on a surement rendu de l'ESP si avoir converti.
             if (calculResultBean.totalReductions - calculResultBean.totalProduits > 0) {

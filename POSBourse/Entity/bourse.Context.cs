@@ -35,5 +35,6 @@ namespace POSBourse.Entity
         public virtual DbSet<EnteredDiscount> EnteredDiscountSet { get; set; }
         public virtual DbSet<CashInput> CashInputSet { get; set; }
         public virtual DbSet<CashOutput> CashOutputSet { get; set; }
+        public virtual DbSet<Parameters> ParametersSet { get; set; }
     }
 }

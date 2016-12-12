@@ -15,11 +15,10 @@ namespace POSBourse.Entity
     public partial class EmittedCoupon
     {
         public int Id { get; set; }
-        public string couponID { get; set; }
         public string onlyOn { get; set; }
         public string transactionSpecificity { get; set; }
         public string policeBookID { get; set; }
-        public string value { get; set; }
+        public decimal value { get; set; }
         public System.DateTime datetime { get; set; }
         public int TransactionId { get; set; }
     

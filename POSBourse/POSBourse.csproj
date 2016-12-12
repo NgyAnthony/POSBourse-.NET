@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Bean\CalculResultBean.cs" />
     <Compile Include="Bean\ComboboxBean.cs" />
+    <Compile Include="Bean\EmittedCouponSpecificityResultBean.cs" />
     <Compile Include="Bean\MultipayBean.cs" />
     <Compile Include="Bean\StandardKeyValueBean.cs" />
     <Compile Include="Bean\TableAvoir.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Bean\TableProduct.cs" />
     <Compile Include="Bean\TableRemise.cs" />
     <Compile Include="Business\TransactionManager.cs" />
+    <Compile Include="Business\TransactionRegister.cs" />
     <Compile Include="Entity\bourse.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,6 +117,9 @@
     <Compile Include="Entity\EnteredDiscount.cs">
       <DependentUpon>bourse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Parameters.cs">
+      <DependentUpon>bourse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Product.cs">
       <DependentUpon>bourse.tt</DependentUpon>
     </Compile>
@@ -124,17 +129,30 @@
     <Compile Include="Entity\Transaction.cs">
       <DependentUpon>bourse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enum\AvoirTypeEnum.cs" />
+    <Compile Include="Enum\ProductTypeEnum.cs" />
+    <Compile Include="Enum\TransactionTypeEnum.cs" />
+    <Compile Include="Enum\PaiementTypeEnum.cs" />
+    <Compile Include="Enum\ReassortTypeEnum.cs" />
+    <Compile Include="Enum\RemiseType.cs" />
     <Compile Include="Form\FormUtils.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Popup\EmittedCouponSpecificities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Popup\Multipay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Popup\EmittedCouponSpecificities.xaml.cs">
+      <DependentUpon>EmittedCouponSpecificities.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popup\Multipay.xaml.cs">
       <DependentUpon>Multipay.xaml</DependentUpon>
     </Compile>
